@@ -1,7 +1,7 @@
 manifestVersion: 1
-id: sparkles-hello-world
-name: Hello World
-tagline: Replace this tagline with your app's tagline
+id: gd-magazzino
+name: Magazzino
+tagline: Magazzino
 icon: https://svgur.com/i/mvA.svg
 category: Development
 version: "1.0.0"
@@ -13,8 +13,8 @@ description: >-
   You can also add newlines!
 
 developer: Umbrel
-website: https://umbrel.com
-submitter: Umbrel
+website: https://gigiomiccio.it
+submitter: Dany
 submission: https://github.com/getumbrel/umbrel-hello-world-app
 repo: https://github.com/getumbrel/umbrel-hello-world-app
 support: https://github.com/getumbrel/umbrel-hello-world-app/issues
