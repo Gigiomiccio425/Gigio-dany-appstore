@@ -1,14 +1,18 @@
-version: "3.7"
-
 services:
-
-  app_proxy:
+  magazzino:
+    image: ghcr.io/gigiomiccio425/magazzino-zimaos:1.1.1
+    container_name: magazzino
+    pull_policy: always
+    ports:
+      # host:container -> apri http://IP-ZIMA:8086
+      - "8086:8000"
     environment:
-      # The format here is: <app-id>_<docker-service-name>_1
-      APP_HOST: sparkles-hello-world_server_1
-      APP_PORT: 3000
-    
-  server:
-    image: getumbrel/community-app-store-hello-world:latest
-    user: "1000:1000"
-    init: true
+      - APP_PASSWORD=${APP_PASSWORD:-cambiami}   # CAMBIALA
+      - APP_NAME=${APP_NAME:-MAGAZZINO}
+      - SECRET_KEY=${SECRET_KEY:-}
+      - TZ=${TZ:-Europe/Rome}
+      - DATA_DIR=/data
+    volumes:
+      # bind mount su path host ZimaOS (persistenza dati)
+      - /DATA/AppData/magazzino:/data
+    restart: unless-stopped
