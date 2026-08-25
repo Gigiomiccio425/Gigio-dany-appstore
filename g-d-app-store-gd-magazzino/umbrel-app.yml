@@ -1,0 +1,32 @@
+manifestVersion: 1
+id: g-d-app-store-gd-magazzino
+name: GD Magazzino
+tagline: Gestione semplice del tuo magazzino
+icon: https://gigiomiccio.it/magazzino/icon.png
+category: Utilities
+version: "1.1.1"
+port: 8000
+
+description: >-
+  GD Magazzino è un'applicazione semplice e intuitiva per la gestione
+  del magazzino. Permette di organizzare prodotti, quantità e dati
+  direttamente dal proprio server Umbrel.
+
+developer: Gigiomiccio425
+website: https://gigiomiccio.it
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+repo: https://github.com/Gigiomiccio425/magazzino-zimaOS
+support: https://github.com/Gigiomiccio425/magazzino-zimaOS/issues
+
+gallery:
+  - https://i.imgur.com/yyVG0Jb.jpeg
+
+releaseNotes: >-
+  Prima versione di GD Magazzino per UmbrelOS.
+
+dependencies: []
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
