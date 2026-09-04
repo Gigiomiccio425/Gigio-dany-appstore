@@ -1,1 +1,6 @@
 .DS_Store
+# Mai committare segreti: i valori veri stanno in
+# ~/umbrel/app-data/<app-id>/.env sul dispositivo, non qui.
+.env
+.env.*
+!.env.example

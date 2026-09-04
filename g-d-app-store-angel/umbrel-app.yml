@@ -1,0 +1,51 @@
+manifestVersion: 1
+id: g-d-app-store-angel
+name: ANGEL
+tagline: Il custode del tuo server Discord
+icon: https://raw.githubusercontent.com/Gigiomiccio425/aegis-discord-bot/main/docs/icon.svg
+category: Social
+version: "1.27.0"
+port: 7801
+
+description: >-
+  Bot Discord di moderazione e sicurezza self-hosted. Anti-raid, anti-nuke,
+  scanner delle immagini con lettura dei QR e OCR, registro approfondito di
+  ogni azione e pannello di controllo web.
+
+
+  Prima di installarlo serve un'applicazione Discord (token del bot, Client ID
+  e Client Secret) con tutti e tre i Privileged Gateway Intents attivi:
+  Presence, Server Members e Message Content. Se ne manca uno solo Discord
+  rifiuta la connessione con «Used disallowed intents» e il bot riparte in
+  ciclo senza collegarsi.
+
+
+  Dopo l'installazione i valori vanno scritti in
+  app-data/g-d-app-store-angel/.env sul tuo Umbrel: senza DISCORD_TOKEN il
+  contenitore parte ma non si collega. Le istruzioni complete stanno nel
+  LEGGIMI dentro la cartella dell'app.
+
+
+  Il bot parte con tutti i moduli spenti: si accendono dal pannello, e conviene
+  tenere la modalità prova accesa per qualche giorno prima di far sanzionare.
+
+developer: Gigiomiccio425
+website: https://github.com/Gigiomiccio425/aegis-discord-bot
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+repo: https://github.com/Gigiomiccio425/aegis-discord-bot
+support: https://github.com/Gigiomiccio425/aegis-discord-bot/issues
+
+gallery:
+  - https://raw.githubusercontent.com/Gigiomiccio425/aegis-discord-bot/main/docs/icon.svg
+
+releaseNotes: >-
+  Prima versione di ANGEL per umbrelOS. Stessa immagine usata su ZimaOS
+  (ghcr.io/gigiomiccio425/aegis-discord-bot:1.27.0): bot, worker e pannello in
+  un contenitore solo, con Postgres e Redis accanto.
+
+dependencies: []
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
