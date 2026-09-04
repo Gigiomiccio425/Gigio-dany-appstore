@@ -4,7 +4,7 @@ name: ANGEL
 tagline: Il custode del tuo server Discord
 icon: https://raw.githubusercontent.com/Gigiomiccio425/aegis-discord-bot/main/docs/icon.svg
 category: Social
-version: "1.27.0"
+version: "1.24.0"
 port: 7801
 
 description: >-
@@ -41,7 +41,7 @@ gallery:
 
 releaseNotes: >-
   Prima versione di ANGEL per umbrelOS. Stessa immagine usata su ZimaOS
-  (ghcr.io/gigiomiccio425/aegis-discord-bot:1.27.0): bot, worker e pannello in
+  (ghcr.io/gigiomiccio425/aegis-discord-bot:1.24.0): bot, worker e pannello in
   un contenitore solo, con Postgres e Redis accanto.
 
 dependencies: []
