@@ -39,7 +39,7 @@ services:
   # produce un'app che si installa, parte, e mostra una pagina bianca.
   app_proxy:
     environment:
-      APP_HOST: gigiodany-angel_angel_1
+      APP_HOST: g-d-app-store-gd-angel_angel_1
       APP_PORT: 8080
 
   # ─────────────────────────────────────────────────────────
