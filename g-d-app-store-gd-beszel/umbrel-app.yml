@@ -1,0 +1,79 @@
+manifestVersion: 1
+
+# Deve cominciare con l'`id` dello store, quello in `umbrel-app-store.yml`.
+# La cartella che contiene questo file deve chiamarsi esattamente così: è
+# anche il prefisso dei nomi dei container, e quindi di `APP_HOST` dentro
+# il compose.
+id: g-d-app-store-gd-beszel
+
+category: Monitoring
+name: Beszel
+version: "0.19.0"
+tagline: Monitoraggio leggero dei tuoi server
+
+description: >
+  Cruscotto di monitoraggio per i tuoi server, con storico e allarmi.
+
+
+  Cosa mostra:
+
+
+  - CPU, memoria, disco e rete, con storico e medie a 1 minuto, 10 minuti,
+    20 minuti, 120 minuti e 480 minuti
+
+  - Temperature dei sensori e uso della GPU (Nvidia e AMD)
+
+  - Statistiche per singolo container Docker, non solo per macchina
+
+  - Allarmi via email o webhook: macchina irraggiungibile, soglie superate,
+    riavvio, spazio che sta finendo
+
+
+  L'interfaccia è il *hub*: da sola non misura nulla. Ogni macchina da
+  sorvegliare — questo Umbrel compreso — vuole un *agente*, che si installa
+  dalla pagina «Add system» del pannello: lì trovi chiave e token già
+  compilati nel comando da copiare.
+
+
+  L'agente è di sola lettura e non apre porte verso l'esterno: parla con il
+  hub sulla rete locale o via WireGuard/Tailscale.
+
+developer: henrygd
+website: https://beszel.dev
+dependencies: []
+repo: https://github.com/henrygd/beszel
+support: https://github.com/henrygd/beszel/issues
+
+# La porta che umbrelOS apre e gira ad `app_proxy`. È la stessa su cui il hub
+# ascolta dentro il container: tenerle uguali evita che l'indirizzo scritto in
+# `APP_URL` — quello che finisce nei link delle notifiche — debba essere
+# corretto a mano se un giorno cambia il proxy.
+port: 8090
+
+icon: https://raw.githubusercontent.com/henrygd/beszel/main/internal/site/public/static/icon.svg
+
+gallery:
+  - https://beszel.dev/image/dashboard.png
+  - https://beszel.dev/image/system-full.png
+  - https://beszel.dev/image/settings-notifications.png
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+
+releaseNotes: >
+  Prima versione pubblicata su questo store: Beszel 0.19.0.
+
+
+  Al primo avvio il pannello chiede di creare l'utente amministratore: la
+  password la scegli tu e non esiste da nessuna parte prima di allora.
+
+
+  Per aggiornare, cambia il tag dell'immagine in `docker-compose.yml` e la
+  `version` qui sopra, poi aggiorna l'app da umbrelOS. Il tag è fissato di
+  proposito e non è `latest`: umbrelOS decide che c'è un aggiornamento
+  confrontando questa `version`, e con `latest` l'immagine cambierebbe sotto
+  i piedi senza che il pannello lo dica mai.
+
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
