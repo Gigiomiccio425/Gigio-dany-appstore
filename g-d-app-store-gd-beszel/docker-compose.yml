@@ -1,16 +1,25 @@
 # ─────────────────────────────────────────────────────────────
 #  Beszel — app per umbrelOS
 #
-#  Qui c'è solo il *hub*, cioè il pannello. È una scelta, non una
-#  dimenticanza: l'agente che raccoglie le misure vuole una chiave e un
-#  token che il hub genera dopo il primo accesso, e che quindi non possono
-#  esistere al momento dell'installazione. Un agente avviato senza quei due
-#  valori esce subito e resta in ciclo di riavvio: l'app sembrerebbe rotta
-#  appena installata.
+#  Due container: il *hub*, cioè il pannello, e l'*agente* che misura questo
+#  stesso Umbrel. L'agente da solo non basta a nessuno e il hub da solo non
+#  misura nulla: stanno insieme perché la macchina da sorvegliare è la
+#  stessa su cui gira il pannello.
 #
-#  Per sorvegliare questo stesso Umbrel: pannello → «Add system», che mostra
-#  il comando già compilato con chiave e token. In fondo a questo file c'è
-#  il blocco pronto da incollare.
+#  ⚠️ IL TOKEN DELL'AGENTE NON STA QUI, E NON PER PEDANTERIA.
+#
+#     Questa repository è pubblica, e i token nei repo pubblici vengono
+#     raccolti da bot in automatico nel giro di ore. Il token va scritto
+#     una volta sola sulla macchina, in
+#        ~/umbrel/app-data/g-d-app-store-gd-beszel/.env
+#     come riga  BESZEL_TOKEN=...
+#     Quel file lo legge compose da solo, e sopravvive agli aggiornamenti
+#     dell'app: non arriva dallo store, quindi umbrelOS non lo riscrive.
+#     Le istruzioni per intero stanno accanto all'agente, più in basso.
+#
+#     La `KEY` invece sta qui in chiaro ed è giusto così: è la chiave
+#     *pubblica* del hub, quella con cui l'agente riconosce chi lo
+#     interroga. Una chiave pubblica pubblicata resta una chiave pubblica.
 #
 #  Differenze dal compose ufficiale di Beszel, e non sono cosmetiche:
 #
@@ -25,10 +34,9 @@
 #    (`./beszel_data`) finirebbero dove capita a seconda di dove compose
 #    viene lanciato.
 #
-#  • `beszel_socket` è montato anche senza agente. È la strada che l'agente
-#    userebbe stando sulla stessa macchina — più diretta della rete — e
-#    aggiungere un volume dopo, a database già popolato, significa fermare
-#    il container: tanto vale che ci sia dall'inizio, vuoto non costa nulla.
+#  • Niente `container_name`. Su umbrelOS il nome lo compone il progetto
+#    (<id-app>_<servizio>_1), ed è quello che `APP_HOST` deve indicare:
+#    fissarlo a mano fa divergere le due cose.
 # ─────────────────────────────────────────────────────────────
 version: "3.7"
 
@@ -50,7 +58,8 @@ services:
     # aggiornamento confrontando la `version` del manifesto, e con un tag
     # mobile l'immagine cambierebbe a ogni riavvio senza che il pannello lo
     # dica mai — compresi i cambi che rompono, in un momento qualsiasi.
-    # Per aggiornare: cambia il numero qui e la `version` in umbrel-app.yml.
+    # Per aggiornare: cambia il numero qui, quello dell'agente, e la
+    # `version` in umbrel-app.yml.
     image: henrygd/beszel:0.19.0
     restart: on-failure
     stop_grace_period: 1m
@@ -70,38 +79,75 @@ services:
     volumes:
       # Database, utenti, sistemi registrati e storico delle misure.
       - ${APP_DATA_DIR}/data/beszel:/beszel_data
-      # Dove l'agente si farà trovare se un giorno lo aggiungi qui sotto.
+      # La strada breve verso l'agente, che sta sulla stessa macchina.
       - ${APP_DATA_DIR}/data/socket:/beszel_socket
 
-# ─────────────────────────────────────────────────────────────
-#  AGENTE PER QUESTO STESSO UMBREL
-#
-#  Da aggiungere DOPO il primo accesso al pannello, quando «Add system» ha
-#  mostrato chiave e token. Incolla il blocco dentro `services:` qui sopra,
-#  sostituisci i due valori, e riavvia l'app.
-#
-#  ⚠️ `/var/run/docker.sock` è quello che permette le statistiche per
-#  container, ed è anche la cosa più delicata di questo file: chi può
-#  parlare con quel socket può creare container, e quindi ottenere i
-#  permessi di root sull'Umbrel. Il `:ro` protegge il file, non l'API.
-#  Se ti bastano CPU, memoria e disco della macchina, togli quella riga:
-#  l'agente funziona lo stesso e perdi soltanto il dettaglio per container.
-#
-#  ⚠️ Le modifiche fatte al compose dentro app-data NON sopravvivono a un
-#  aggiornamento dell'app: umbrelOS riscrive il file con quello dello store.
-#  Per renderle stabili, la modifica va fatta qui, in questa repository.
-#
-#  beszel-agent:
-#    image: henrygd/beszel-agent:0.19.0
-#    restart: on-failure
-#    network_mode: host
-#    environment:
-#      LISTEN: /beszel_socket/beszel.sock
-#      HUB_URL: http://localhost:8090
-#      KEY: "<la chiave mostrata da Add system>"
-#      TOKEN: "<il token mostrato da Add system>"
-#    volumes:
-#      - ${APP_DATA_DIR}/data/agent:/var/lib/beszel-agent
-#      - ${APP_DATA_DIR}/data/socket:/beszel_socket
-#      - /var/run/docker.sock:/var/run/docker.sock:ro
-# ─────────────────────────────────────────────────────────────
+  # ─────────────────────────────────────────────────────────
+  #  AGENTE — misura questo Umbrel
+  #
+  #  PRIMA DI INSTALLARE, o subito dopo: il token va scritto sulla
+  #  macchina, perché qui dentro non può stare.
+  #
+  #    echo 'BESZEL_TOKEN=il-tuo-token' | sudo tee -a \
+  #      ~/umbrel/app-data/g-d-app-store-gd-beszel/.env
+  #    sudo ~/umbrel/scripts/app restart g-d-app-store-gd-beszel
+  #
+  #  Il token lo mostra il pannello in «Add system», insieme alla chiave.
+  #  Se lo cambi da lì, cambia la riga nel `.env` — non questo file.
+  #
+  #  Senza token l'agente parte, non riesce a registrarsi e viene riavviato
+  #  in ciclo: il hub funziona lo stesso, semplicemente non vede questa
+  #  macchina. È il modo in cui te ne accorgi.
+  # ─────────────────────────────────────────────────────────
+  beszel-agent:
+    image: henrygd/beszel-agent:0.19.0
+    restart: on-failure
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Rete dell'host, non quella dell'app: le misure di rete prese dentro
+    # una rete virtuale di Docker sarebbero quelle della rete virtuale, cioè
+    # non dicono niente sulla macchina. Serve anche a raggiungere il hub
+    # sulla porta che umbrelOS pubblica sull'host.
+    network_mode: host
+    environment:
+      # `localhost` e non `umbrel.local`: dalla rete dell'host la porta
+      # pubblicata da umbrelOS si raggiunge direttamente, senza passare per
+      # la risoluzione mDNS del nome — che su alcune reti non risponde, e
+      # farebbe fallire la registrazione senza un motivo evidente.
+      HUB_URL: http://localhost:8090
+
+      # Chiave *pubblica* del hub: con questa l'agente accetta di essere
+      # interrogato solo da chi possiede la privata corrispondente.
+      KEY: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMm4piqnxzYmdEOxtC+EiB0vxIgUbp28aOw0gMllsE/"
+
+      # Dal file `.env` sulla macchina — vedi il blocco qui sopra.
+      TOKEN: ${BESZEL_TOKEN:-}
+
+      # Porta su cui l'agente si fa trovare. Con `HUB_URL` e `TOKEN`
+      # impostati è l'agente a cercare il hub, e questa resta la via di
+      # riserva; occupa comunque la 45876 sull'host, quindi va lasciata
+      # libera.
+      LISTEN: 45876
+    volumes:
+      - ${APP_DATA_DIR}/data/agent:/var/lib/beszel-agent
+      - ${APP_DATA_DIR}/data/socket:/beszel_socket
+
+      # ⚠️ Questa riga è la cosa più delicata del file. Dà le statistiche
+      # per singolo container, e insieme la possibilità di crearne: chi
+      # parla con il socket di Docker può avviare un container privilegiato,
+      # e quindi ottenere root sull'Umbrel. Il `:ro` protegge il file, non
+      # l'API che c'è dietro.
+      #
+      # Se ti bastano CPU, memoria, disco e rete della macchina, togli la
+      # riga: l'agente funziona lo stesso e perdi soltanto il dettaglio per
+      # container.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+      # Per sorvegliare altri dischi o partizioni, monta una cartella che
+      # sta su ciascuno dentro /extra-filesystems. Il nome che dai alla
+      # cartella è quello che compare nel pannello.
+      # - /mnt/disco/.beszel:/extra-filesystems/sda1:ro
