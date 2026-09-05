@@ -60,6 +60,14 @@ port: 780
 
 icon: https://raw.githubusercontent.com/Gigiomiccio425/aegis-discord-bot/main/docs/icon.svg
 
+# Obbligatoria nello schema di umbrelOS: `gallery` non e' opzionale, e un
+# manifesto senza non supera la validazione — l'app viene scartata e non si
+# installa. Qui c'e' solo l'icona perche' nel repository del bot non ci sono
+# schermate: sostituirla con immagini vere del pannello e' un miglioramento
+# per chi guarda, non una correzione.
+gallery:
+  - https://raw.githubusercontent.com/Gigiomiccio425/aegis-discord-bot/main/docs/icon.svg
+
 path: ""
 defaultUsername: ""
 defaultPassword: ""

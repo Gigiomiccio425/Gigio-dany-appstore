@@ -66,6 +66,12 @@ port: 45876
 
 icon: https://raw.githubusercontent.com/henrygd/beszel/main/internal/site/public/static/icon.svg
 
+# Obbligatoria nello schema di umbrelOS anche per un'app senza interfaccia:
+# `gallery` non e' opzionale, e un manifesto senza non supera la validazione.
+gallery:
+  - https://beszel.dev/image/system-full.png
+  - https://beszel.dev/image/dashboard.png
+
 path: ""
 defaultUsername: ""
 defaultPassword: ""
