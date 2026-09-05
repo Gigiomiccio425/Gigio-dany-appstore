@@ -1,0 +1,98 @@
+# ─────────────────────────────────────────────────────────────
+#  Beszel Agent — app per umbrelOS
+#
+#  Misura questa macchina e la racconta a un pannello Beszel. Il pannello
+#  può essere quello dell'app «Beszel» qui accanto, o uno su un'altra
+#  macchina: all'agente non cambia niente, cambia solo `HUB_URL`.
+#
+#  ⚠️ IL TOKEN NON STA QUI, E NON PER PEDANTERIA.
+#
+#     Questa repository è pubblica, e i token nei repository pubblici
+#     vengono raccolti da bot in automatico. Il token va scritto una volta
+#     sola sulla macchina, in
+#        ~/umbrel/app-data/g-d-app-store-gd-beszel-agent/.env
+#     come riga  BESZEL_TOKEN=...
+#     Quel file lo legge compose da solo, e sopravvive agli aggiornamenti
+#     dell'app: non arriva dallo store, quindi umbrelOS non lo riscrive.
+#
+#     Chiave e token li mostra il pannello in «Add system». La `KEY` invece
+#     sta qui in chiaro ed è giusto così: è la chiave *pubblica* del hub,
+#     quella con cui l'agente riconosce chi lo interroga. Una chiave
+#     pubblica pubblicata resta una chiave pubblica.
+#
+#  Niente `app_proxy`, e non è una dimenticanza: l'agente non ha una pagina
+#  web da mostrare, e con `network_mode: host` non starebbe comunque sulla
+#  rete dell'app, dove il proxy lo cerca per nome. È lo stesso schema
+#  dell'app Tailscale ufficiale, che per gli stessi motivi non ce l'ha.
+# ─────────────────────────────────────────────────────────────
+version: "3.7"
+
+services:
+  agent:
+    # Versione fissata, non `latest`: umbrelOS capisce che c'è un
+    # aggiornamento confrontando la `version` del manifesto, e con un tag
+    # mobile l'immagine cambierebbe a ogni riavvio senza che il pannello lo
+    # dica mai. Tienila allineata a quella del hub.
+    image: henrygd/beszel-agent:0.19.0
+    restart: on-failure
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        # Senza limite un errore che si ripete riempie il disco con il
+        # proprio racconto.
+        max-size: "10m"
+        max-file: "3"
+    # Rete dell'host, non quella dell'app: le misure di rete prese dentro
+    # una rete virtuale di Docker sarebbero quelle della rete virtuale, cioè
+    # non direbbero niente sulla macchina. Serve anche a raggiungere il hub
+    # sulla porta che umbrelOS pubblica sull'host.
+    network_mode: host
+    environment:
+      # Il pannello a cui riferire.
+      #
+      # `localhost` e non `umbrel.local` quando il hub è su questa stessa
+      # macchina: dalla rete dell'host la porta pubblicata da umbrelOS si
+      # raggiunge diretta, senza passare per la risoluzione mDNS del nome —
+      # che su alcune reti non risponde, e farebbe fallire la registrazione
+      # senza un motivo evidente.
+      #
+      # Per un pannello altrove, metti qui il suo indirizzo.
+      HUB_URL: ${BESZEL_HUB_URL:-http://localhost:8090}
+
+      # Chiave *pubblica* del hub: con questa l'agente accetta di essere
+      # interrogato solo da chi possiede la privata corrispondente.
+      # Sostituiscila se il pannello non è il tuo — la mostra «Add system».
+      KEY: ${BESZEL_KEY:-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMm4piqnxzYmdEOxtC+EiB0vxIgUbp28aOw0gMllsE/}
+
+      # Dal file `.env` sulla macchina — vedi il blocco in cima.
+      #
+      # Senza, l'agente parte, non riesce a registrarsi e viene riavviato in
+      # ciclo. È il modo in cui te ne accorgi.
+      TOKEN: ${BESZEL_TOKEN:-}
+
+      # Porta su cui l'agente si fa trovare. Con `HUB_URL` e `TOKEN`
+      # impostati è l'agente a cercare il hub, e questa resta la via di
+      # riserva; occupa comunque la 45876 sull'host, quindi va lasciata
+      # libera.
+      LISTEN: 45876
+
+      TZ: Europe/Rome
+    volumes:
+      - ${APP_DATA_DIR}/data/agent:/var/lib/beszel-agent
+
+      # ⚠️ Questa riga è la cosa più delicata del file. Dà le statistiche
+      # per singolo container, e insieme la possibilità di crearne: chi
+      # parla con il socket di Docker può avviare un container privilegiato,
+      # e quindi ottenere root sull'Umbrel. Il `:ro` protegge il file, non
+      # l'API che c'è dietro.
+      #
+      # Se ti bastano CPU, memoria, disco e rete della macchina, togli la
+      # riga: l'agente funziona lo stesso e perdi soltanto il dettaglio per
+      # container.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+      # Per sorvegliare altri dischi o partizioni, monta una cartella che
+      # sta su ciascuno dentro /extra-filesystems. Il nome che dai alla
+      # cartella è quello che compare nel pannello.
+      # - /mnt/disco/.beszel:/extra-filesystems/sda1:ro

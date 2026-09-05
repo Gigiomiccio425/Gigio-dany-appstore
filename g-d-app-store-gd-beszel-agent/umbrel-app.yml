@@ -1,0 +1,93 @@
+manifestVersion: 1
+
+# Deve cominciare con l'`id` dello store, quello in `umbrel-app-store.yml`.
+# La cartella che contiene questo file deve chiamarsi esattamente così.
+id: g-d-app-store-gd-beszel-agent
+
+category: Monitoring
+name: Beszel Agent
+version: "0.19.0"
+tagline: Fa misurare questo Umbrel da Beszel
+
+description: >
+  L'agente di Beszel: misura questa macchina e la racconta a un pannello.
+
+
+  Da solo non mostra niente — non ha una pagina web, e il riquadro qui non
+  si apre. Quello che raccoglie si guarda nel pannello: l'app «Beszel» in
+  questo store, o un pannello su un'altra macchina.
+
+
+  Cosa manda:
+
+
+  - CPU, memoria, disco e rete della macchina
+
+  - Temperature dei sensori e uso della GPU (Nvidia e AMD)
+
+  - Statistiche per singolo container Docker
+
+  - Altri dischi e partizioni, se glieli monti dentro /extra-filesystems
+
+
+  ⚠️ INSTALLA PRIMA IL PANNELLO. Il token che serve qui lo genera lui, e non
+  esiste finché non ci sei entrato almeno una volta.
+
+
+  Poi, dal pannello, «Add system»: mostra chiave e token. Il token va scritto
+  sulla macchina, perché nella repository dello store — che è pubblica — i
+  token verrebbero raccolti da bot in automatico:
+
+
+  echo 'BESZEL_TOKEN=il-tuo-token' | sudo tee -a
+  ~/umbrel/app-data/g-d-app-store-gd-beszel-agent/.env
+
+
+  sudo ~/umbrel/scripts/app restart g-d-app-store-gd-beszel-agent
+
+
+  Nello stesso file puoi mettere `BESZEL_KEY=` per la chiave, se il pannello
+  non è quello preconfigurato, e `BESZEL_HUB_URL=` se sta su un'altra
+  macchina.
+
+developer: henrygd
+website: https://beszel.dev
+dependencies: []
+repo: https://github.com/henrygd/beszel
+support: https://github.com/henrygd/beszel/issues
+
+# L'agente non ha interfaccia web: questa porta è quella su cui si fa
+# trovare, e umbrelOS la usa solo per riservarla. Il riquadro dell'app non
+# apre nulla di utile — è la natura di un raccoglitore di misure.
+#
+# Con `network_mode: host` la porta sta sulla rete della macchina: se ci gira
+# già qualcos'altro, l'agente non parte.
+port: 45876
+
+icon: https://raw.githubusercontent.com/henrygd/beszel/main/internal/site/public/static/icon.svg
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+
+releaseNotes: >
+  Prima versione pubblicata su questo store: Beszel Agent 0.19.0.
+
+
+  Separato dal pannello di proposito: fanno due mestieri diversi e si
+  spengono in momenti diversi — il pannello può stare fermo senza che le
+  macchine smettano di essere sorvegliate, e un agente si installa su una
+  macchina dove il pannello non c'è affatto.
+
+
+  Monta il socket di Docker per dare le statistiche per singolo container. È
+  anche la parte più delicata: chi può parlare con quel socket può avviare
+  container, e quindi ottenere root sull'Umbrel. Se ti bastano CPU, memoria,
+  disco e rete della macchina, la riga si toglie dal compose e l'agente
+  continua a funzionare.
+
+
+  Tieni il tag dell'immagine allineato a quello del pannello.
+
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore

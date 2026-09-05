@@ -29,25 +29,18 @@ description: >
     riavvio, spazio che sta finendo
 
 
-  Dentro ci sono il pannello e l'agente che misura questo stesso Umbrel. Per
-  sorvegliare altre macchine, «Add system» nel pannello mostra il comando da
-  copiare, con chiave e token già compilati.
+  Questa è l'interfaccia, il *hub*: da sola non misura nulla. Ogni macchina
+  da sorvegliare vuole un *agente*.
 
 
-  ⚠️ UN PASSAGGIO A MANO, UNO SOLO. Il token dell'agente non può stare nella
-  repository dello store, che è pubblica: i token nei repository pubblici
-  vengono raccolti da bot in automatico. Va scritto una volta sulla macchina:
+  Per sorvegliare questo stesso Umbrel c'è «Beszel Agent» in questo store, da
+  installare dopo: serve un token che il pannello genera solo al primo
+  accesso. Per le altre macchine, la pagina «Add system» del pannello mostra
+  il comando da copiare, con chiave e token già compilati.
 
 
-  echo 'BESZEL_TOKEN=il-tuo-token' | sudo tee -a
-  ~/umbrel/app-data/g-d-app-store-gd-beszel/.env
-
-
-  sudo ~/umbrel/scripts/app restart g-d-app-store-gd-beszel
-
-
-  Senza, il pannello funziona lo stesso: semplicemente non vede questa
-  macchina.
+  Al primo avvio il pannello chiede di creare l'utente amministratore: la
+  password la scegli tu e non esiste da nessuna parte prima di allora.
 
 developer: henrygd
 website: https://beszel.dev
@@ -59,8 +52,6 @@ support: https://github.com/henrygd/beszel/issues
 # ascolta dentro il container: tenerle uguali evita che l'indirizzo scritto in
 # `APP_URL` — quello che finisce nei link delle notifiche — debba essere
 # corretto a mano se un giorno cambia il proxy.
-#
-# L'agente occupa in più la 45876 sulla rete dell'host: va lasciata libera.
 port: 8090
 
 icon: https://raw.githubusercontent.com/henrygd/beszel/main/internal/site/public/static/icon.svg
@@ -75,24 +66,18 @@ defaultUsername: ""
 defaultPassword: ""
 
 releaseNotes: >
-  Prima versione pubblicata su questo store: Beszel 0.19.0, pannello e agente
-  per questa macchina.
+  Prima versione pubblicata su questo store: Beszel 0.19.0, il solo pannello.
 
 
-  Al primo avvio il pannello chiede di creare l'utente amministratore: la
-  password la scegli tu e non esiste da nessuna parte prima di allora.
+  L'agente sta in un'app a parte, «Beszel Agent»: fanno due mestieri diversi e
+  si spengono in momenti diversi — il pannello può stare fermo senza che le
+  macchine smettano di essere sorvegliate, e un agente si installa su una
+  macchina dove il pannello non c'è affatto.
 
 
-  L'agente monta il socket di Docker per dare le statistiche per singolo
-  container. È anche la parte più delicata: chi può parlare con quel socket
-  può avviare container, e quindi ottenere root sull'Umbrel. Se ti bastano
-  CPU, memoria, disco e rete della macchina, la riga si toglie dal compose e
-  l'agente continua a funzionare.
-
-
-  Per aggiornare, cambia i due tag delle immagini in `docker-compose.yml` e la
-  `version` qui sopra, poi aggiorna l'app da umbrelOS. I tag sono fissati di
-  proposito e non sono `latest`: umbrelOS decide che c'è un aggiornamento
+  Per aggiornare, cambia il tag dell'immagine in `docker-compose.yml` e la
+  `version` qui sopra, poi aggiorna l'app da umbrelOS. Il tag è fissato di
+  proposito e non è `latest`: umbrelOS decide che c'è un aggiornamento
   confrontando questa `version`, e con `latest` l'immagine cambierebbe sotto
   i piedi senza che il pannello lo dica mai.
 
