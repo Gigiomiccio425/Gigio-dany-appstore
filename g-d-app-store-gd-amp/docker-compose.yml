@@ -7,7 +7,6 @@ services:
       PROXY_AUTH_ADD: "false"
   amp:
     image: mitchtalmadge/amp-dockerized:latest
-    user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
     mac_address: "02:42:AC:1A:2B:3C"
