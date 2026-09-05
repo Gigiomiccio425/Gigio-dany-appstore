@@ -1,0 +1,35 @@
+manifestVersion: 1
+id: g-d-app-store-gd-amp
+name: GD AMP
+tagline: CubeCoders AMP game server panel (unofficial Docker)
+icon: https://cubecoders.com/images/amp_logo.png
+category: Gaming
+version: "2.7.2-1"
+port: 8080
+description: >-
+  GD AMP porta CubeCoders AMP sul tuo Umbrel come app nativa dello store
+  Gigio & Dany, senza passare dal Docker interno di Portainer che bloccava
+  cdn-downloads.c7rs.com.
+
+  Gestisci Minecraft Java/Bedrock, Valheim, Satisfactory, Factorio, GMod,
+  TF2 e altri da web UI sulla 8080.
+
+  ⚠️ Immagine NON ufficiale mitchtalmadge/amp-dockerized, non supportata da
+  CubeCoders. Serve licenza a pagamento da cubecoders.com/AMP.
+
+  Al primo avvio usa admin / password e cambiali subito. MAC address fisso
+  incluso per non perdere la licenza ad ogni riavvio.
+developer: CubeCoders (packaging non ufficiale: MitchTalmadge)
+website: https://cubecoders.com/AMP
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+repo: https://github.com/MitchTalmadge/AMP-dockerized
+support: https://github.com/MitchTalmadge/AMP-dockerized/issues
+gallery:
+  - https://i.imgur.com/yyVG0Jb.jpeg
+releaseNotes: >-
+  Prima versione GD AMP per UmbrelOS: AMP 2.7.2 via mitchtalmadge/amp-dockerized.
+dependencies: []
+path: ""
+defaultUsername: "admin"
+defaultPassword: "password"

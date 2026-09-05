@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-amp_amp_1
+      APP_PORT: 8080
+      PROXY_AUTH_ADD: "false"
+  amp:
+    image: mitchtalmadge/amp-dockerized:latest
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 30s
+    mac_address: "02:42:AC:1A:2B:3C"
+    ports:
+      - "8080:8080"
+      - "25565:25565/tcp"
+      - "25565:25565/udp"
+    environment:
+      - UID=1000
+      - GID=1000
+      - TZ=Europe/Rome
+      - USERNAME=admin
+      - PASSWORD=password
+      - AMP_AUTO_UPDATE=true
+      - PORT=8080
+      - IPBINDING=0.0.0.0
+    volumes:
+      - ${APP_DATA_DIR}/data:/home/amp/.ampdata
