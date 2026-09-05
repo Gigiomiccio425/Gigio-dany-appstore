@@ -75,7 +75,7 @@ services:
       # impostati è l'agente a cercare il hub, e questa resta la via di
       # riserva; occupa comunque la 45876 sull'host, quindi va lasciata
       # libera.
-      LISTEN: 45876
+      LISTEN: 8091
 
       TZ: Europe/Rome
     volumes:

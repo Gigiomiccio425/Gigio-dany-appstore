@@ -62,7 +62,7 @@ support: https://github.com/henrygd/beszel/issues
 #
 # Con `network_mode: host` la porta sta sulla rete della macchina: se ci gira
 # già qualcos'altro, l'agente non parte.
-port: 45876
+port: 8091
 
 icon: https://raw.githubusercontent.com/henrygd/beszel/main/internal/site/public/static/icon.svg
 
