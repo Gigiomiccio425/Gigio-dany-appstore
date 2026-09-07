@@ -1,0 +1,110 @@
+manifestVersion: 1
+
+# Deve cominciare con l'`id` dello store, quello in `umbrel-app-store.yml`.
+# La cartella che contiene questo file deve chiamarsi esattamente così: è anche
+# il prefisso dei nomi dei container, e quindi di `APP_HOST` dentro il compose.
+id: g-d-app-store-gd-spotify-stats
+
+category: Media
+name: Spotify Stats
+version: "0.2.0"
+tagline: Il tuo storico Spotify, archiviato per sempre
+
+description: >
+  Statistiche di ascolto Spotify con archivio senza scadenza e recap
+  condivisibili, con app Android dedicata.
+
+
+  Spotify non conserva lo storico. L'unico endpoint disponibile restituisce al
+  massimo le ultime 50 tracce, circa due ore e mezza di musica: se nessuno lo
+  interroga entro quella finestra, quegli ascolti sono persi in modo
+  definitivo. Questa app è il server che lo interroga ogni quarto d'ora, giorno
+  e notte, e mette ogni ascolto in una tabella che non viene mai svuotata.
+
+
+  Cosa ci trovi dentro:
+
+
+  - Classifiche di brani, artisti, album e generi su qualsiasi intervallo
+
+  - Storico cronologico completo, dal primo giorno
+
+  - Recap giornalieri, settimanali, mensili e annuali, condivisibili come
+    immagine
+
+  - Tendenze di ascolto, orari, giorni della settimana ed età musicale
+    calcolata sugli anni di uscita
+
+  - Import dell'archivio *Extended Streaming History* che Spotify consegna su
+    richiesta: anni di storico anteriori all'installazione
+
+  - Export completo in JSON e cancellazione totale dei dati
+
+
+  DUE COSE DA SAPERE PRIMA DI INSTALLARE.
+
+
+  Primo: serve un'applicazione Spotify tua, gratuita, creata su
+  developer.spotify.com/dashboard. Client ID e Client Secret si incollano nel
+  pannello dell'app dopo l'installazione, non prima.
+
+
+  Secondo, ed è il vincolo vero: Spotify accetta come indirizzo di ritorno solo
+  HTTPS, con la sola eccezione di http://127.0.0.1. Un indirizzo di rete locale
+  come http://umbrel.local viene rifiutato. Per collegare l'account serve
+  quindi esporre questa app su un indirizzo HTTPS pubblico — Tailscale Funnel,
+  Cloudflare Tunnel, un reverse proxy con un dominio. Il pannello dell'app
+  controlla l'indirizzo che gli dai e dice se va bene.
+
+
+  L'app Android sta nelle release del repository, non sul Play Store: si
+  scarica l'APK e si installa. Ogni aggiornamento successivo si installa sopra
+  il precedente, e l'app avvisa da sola quando ne esce uno.
+
+
+  Development Mode di Spotify: un'applicazione non verificata accetta al
+  massimo 25 account, aggiunti a mano per email nella dashboard. Per uso
+  personale o fra amici è abbondante.
+
+developer: Gigiomiccio425
+website: https://github.com/Gigiomiccio425/spotify-stats-tracker
+dependencies: []
+repo: https://github.com/Gigiomiccio425/spotify-stats-tracker
+support: https://github.com/Gigiomiccio425/spotify-stats-tracker/issues
+
+# La porta che umbrelOS apre e gira ad `app_proxy`. Uguale a quella su cui il
+# server ascolta dentro il container: tenerle allineate evita di doversi
+# ricordare due numeri diversi quando si configura il tunnel.
+port: 8787
+
+icon: https://raw.githubusercontent.com/Gigiomiccio425/spotify-stats-tracker/main/docs/assets/icon.svg
+
+gallery:
+  - https://raw.githubusercontent.com/Gigiomiccio425/spotify-stats-tracker/main/docs/assets/cover.svg
+
+path: ""
+
+# Il pannello ha una password sua, generata da umbrelOS e mostrata qui.
+# Non c'è nome utente: c'è un solo pannello e un solo amministratore.
+defaultUsername: ""
+defaultPassword: "$APP_PASSWORD"
+deterministicPassword: true
+
+releaseNotes: >
+  Prima versione pubblicata su questo store.
+
+
+  Rispetto alle installazioni a mano, qui non serve preparare nessun file di
+  configurazione: il server genera da solo le chiavi che gli servono e chiede
+  il resto dal pannello web. Le chiavi restano nel database, quindi
+  sopravvivono agli aggiornamenti dell'immagine — e non vanno mai rigenerate a
+  mano: cambiarle renderebbe illeggibili i token Spotify già salvati e ogni
+  account andrebbe ricollegato.
+
+
+  Dopo l'installazione: apri l'app, incolla Client ID e Client Secret,
+  poi l'indirizzo HTTPS pubblico da cui la raggiungi. Il pannello mostra
+  l'indirizzo di ritorno esatto da registrare nella dashboard Spotify.
+
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore

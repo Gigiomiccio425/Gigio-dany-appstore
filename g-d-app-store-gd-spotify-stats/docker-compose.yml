@@ -1,0 +1,85 @@
+# ─────────────────────────────────────────────────────────────
+#  Spotify Stats — app per umbrelOS
+#
+#  Archivia gli ascolti Spotify per sempre. Serve un server acceso h24 perché
+#  Spotify non conserva lo storico: `recently-played` restituisce al massimo le
+#  ultime 50 tracce, circa due ore e mezza di musica. Se nessuno interroga
+#  l'API entro quella finestra, quegli ascolti sono persi in modo definitivo.
+#
+#  Due container: il server e il suo Postgres.
+#
+#  Note su cosa è diverso da un compose qualsiasi, e non sono cosmetiche:
+#
+#  • `PROXY_AUTH_ADD: "false"`. Di norma umbrelOS mette la propria richiesta di
+#    accesso davanti all'app. Qui non si può: Spotify deve poter tornare
+#    all'indirizzo di callback dall'esterno, e l'app Android deve poter parlare
+#    con le API. Una schermata di accesso davanti le bloccherebbe entrambe.
+#    Al posto suo il pannello ha una password propria (ADMIN_TOKEN) e le API
+#    dell'app vogliono un token di sessione.
+#
+#  • Nessuna sezione `ports:`. La porta la apre `app_proxy`: pubblicarla anche
+#    qui la farebbe contendere fra proxy e container.
+#
+#  • Niente `container_name`. Su umbrelOS il nome lo compone il progetto
+#    (<id-app>_<servizio>_1), ed è quello che `APP_HOST` deve indicare.
+#
+#  • Le credenziali Spotify NON stanno qui. Non c'è nessun punto, installando
+#    da uno store, in cui incollarle prima del primo avvio: si mettono dopo,
+#    dal pannello web dell'app.
+# ─────────────────────────────────────────────────────────────
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-spotify-stats_server_1
+      APP_PORT: 8787
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    # Versione fissata, non `latest`: umbrelOS capisce che c'è un aggiornamento
+    # confrontando la `version` del manifesto, e con un tag mobile l'immagine
+    # cambierebbe a ogni riavvio senza che l'app lo dica mai.
+    # Per aggiornare: cambia il numero qui e la `version` in umbrel-app.yml.
+    image: ghcr.io/gigiomiccio425/spotify-stats-tracker/backend:0.2.0
+    restart: on-failure
+    depends_on:
+      - db
+    logging:
+      driver: json-file
+      options:
+        # Senza limite un errore che si ripete riempie il disco con il proprio
+        # racconto.
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      # La password del database non gira sulla rete di casa: Postgres non
+      # pubblica porte e si raggiunge solo da dentro questo compose.
+      DATABASE_URL: postgres://spotifystats:spotifystats@g-d-app-store-gd-spotify-stats_db_1:5432/spotifystats
+
+      # Password del pannello web. `APP_PASSWORD` la genera umbrelOS e la
+      # mostra nella scheda dell'app.
+      ADMIN_TOKEN: ${APP_PASSWORD}
+
+      # Il poller gira dentro il processo, un giro ogni quarto d'ora. Senza,
+      # nessun ascolto viene archiviato: è la ragione d'essere dell'app.
+      ENABLE_INTERNAL_CRON: "true"
+      POLL_INTERVAL_MINUTES: "15"
+
+      TZ: ${TZ:-Europe/Rome}
+
+  db:
+    # Variante Debian e non Alpine: su alcuni sistemi l'entrypoint di Alpine
+    # non riesce a passare all'utente non privilegiato e il container non parte
+    # affatto.
+    image: postgres:16
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_USER: spotifystats
+      POSTGRES_PASSWORD: spotifystats
+      POSTGRES_DB: spotifystats
+    volumes:
+      # L'archivio degli ascolti. È l'unica cosa irrecuperabile dell'app:
+      # Spotify non la può restituire.
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
