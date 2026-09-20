@@ -23,8 +23,15 @@ I valori vanno in una cartella che gli aggiornamenti non toccano:
 ```bash
 ssh umbrel@umbrel.local
 mkdir -p ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti
+sudo chown -R 1000:1000 ~/umbrel/app-data/g-d-app-store-gd-angel/data
 nano ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti/segreti.env
 ```
+
+Il `chown` serve davvero: le cartelle di bind-mount le crea Docker, e le crea
+di `root`, mentre ANGEL gira con un utente normale (uid 1000). Se la cartella
+resta di `root` non ci scrive, e senza `postgres_password` **Postgres non parte
+proprio**. Se te ne dimentichi non si rompe niente in silenzio: nei log ANGEL
+scrive esattamente quel comando.
 
 Una riga per valore, senza virgolette:
 
