@@ -8,7 +8,7 @@ id: g-d-app-store-gd-angel
 
 category: Networking
 name: ANGEL
-version: "1.29.2"
+version: "1.29.3"
 tagline: Il custode del tuo server Discord
 
 description: >
@@ -84,6 +84,14 @@ releaseNotes: >
 
   - Postgres riceve la password da un file (`POSTGRES_PASSWORD_FILE`) e monta
     quella cartella in sola lettura.
+
+
+  - Correzione della 1.29.2: nei log comparivano uno snapshot ogni due
+    secondi e promemoria «scaduto» a ripetizione. Non era uno scheduler
+    impazzito: erano gli stessi comandi, riconsegnati e rieseguiti per
+    sempre. Bastava una voce che non si riusciva a confermare perché tutta
+    la coda ripartisse a ogni giro. Ora il recupero avanza invece di
+    ricominciare, e ogni comando si conferma anche quando fallisce.
 
 
   - Correzione della 1.29.1: su un'installazione nuova Postgres non partiva,
