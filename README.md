@@ -1,17 +1,73 @@
-## Umbrel Community App Store Template
+# Gigio & Dany — Community App Store per umbrelOS
 
-This repository is a template to create an Umbrel Community App Store. These additional app stores allow developers to distribute applications without submitting to the [Official Umbrel App Store](https://github.com/getumbrel/umbrel-apps).
+Per aggiungerlo: **App Store → ⋯ → Community App Stores → Add**, e incolla
 
-## How to use:
+```
+https://github.com/Gigiomiccio425/Gigio-dany-appstore
+```
 
-1. Start by clicking the "Use this template" button located above.
-2. Assign an ID and name to your app store within the `umbrel-app-store.yml` file. This file specifies two important attributes:
-    - `id` - Acts as a unique prefix for every app within your Community App Store. You must start your application's ID with your app store's ID. For instance, in this template, the app store ID is `sparkles`, and there's an app named `hello world`. Consequently, the app's ID should be: `sparkles-hello-world`.
-    - `name` - This is the name of the Community App Store displayed in the umbrelOS UI.
-3. Change the name of the `sparkles-hello-world` folder to match your app's ID. The app ID is for you to decide. For example, if your app store ID is `whistles`, and your app is named My Video Downloader, you could set its app ID to `whistles-my-video-downloader`, and rename the folder accordingly.
-4. Next, enter your app's listing details in the `whistles-my-video-downloader/umbrel-app.yml`. These are displayed in the umbrelOS UI.
-5. Include the necessary Docker services in `whistles-my-video-downloader/docker-compose.yml`.
-6. That's it! Your Community App Store, featuring your unique app, is now set up and ready to go. To use your Community App Store, you can add its GitHub url the umbrelOS user interface as shown in the following demo:
+## ANGEL
 
+Bot Discord di moderazione e sicurezza, con pannello web. Il pannello risponde
+sulla porta 780, quello per gli streamer Twitch sulla 781.
 
-https://user-images.githubusercontent.com/10330103/197889452-e5cd7e96-3233-4a09-b475-94b754adc7a3.mp4
+### Prima cosa dopo l'installazione: il file dei segreti
+
+Nel `docker-compose.yml` **non c'è nessun dato sensibile, e non va messo**:
+umbrelOS riscrive quel file dal repository a ogni aggiornamento, quindi quello
+che ci si scrive sparisce — e finché ci sta, sta in chiaro in un file leggibile
+da chiunque abbia accesso alla macchina.
+
+I valori vanno in una cartella che gli aggiornamenti non toccano:
+
+```bash
+ssh umbrel@umbrel.local
+mkdir -p ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti
+nano ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti/segreti.env
+```
+
+Una riga per valore, senza virgolette:
+
+```
+DISCORD_TOKEN=il.tuo.token
+DISCORD_CLIENT_ID=il-tuo-client-id
+DISCORD_CLIENT_SECRET=il-tuo-client-secret
+PUBLIC_URL=http://il-tuo-umbrel:780
+OWNER_IDS=il-tuo-id-discord
+```
+
+Poi chiudilo agli altri:
+
+```bash
+chmod 600 ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti/segreti.env
+```
+
+Il segreto di sessione, la chiave di cifratura e la password del database non
+servono: sono numeri casuali, ANGEL se li genera al primo avvio e se li salva
+lì dentro.
+
+Finché manca qualcosa parte **solo il pannello**, e il bot aspetta: ricontrolla
+ogni quindici secondi e parte da solo appena i valori ci sono, senza bisogno di
+riavviare. Nei log compaiono i nomi letti, mai i valori.
+
+`PUBLIC_URL` segreto non è, ma va scritto lì lo stesso: è l'indirizzo di quella
+macchina, e nel compose tornerebbe a `umbrel.local` a ogni aggiornamento. Su
+Discord, in **OAuth2 → Redirects**, deve esserci esattamente lo stesso
+indirizzo seguito da `/api/auth/callback`.
+
+Il resto — travaso dei valori da una versione precedente, password del database
+da riallineare, backup — sta nel
+[README dello sviluppo](https://github.com/Gigiomiccio425/aegis-discord-bot/blob/main/umbrel-appstore/README.md).
+
+---
+
+## Le altre app
+
+`beszel` e `beszel-agent` (monitoraggio), `amp`, `magazzino`, `spotify-stats`.
+
+---
+
+Basato sul [template ufficiale](https://github.com/getumbrel/umbrel-community-app-store)
+di Umbrel. L'`id` di ogni app deve cominciare con quello dello store
+(`g-d-app-store`), e la cartella deve chiamarsi come l'app: è anche il prefisso
+dei nomi dei container, quindi di `APP_HOST` dentro il compose.
