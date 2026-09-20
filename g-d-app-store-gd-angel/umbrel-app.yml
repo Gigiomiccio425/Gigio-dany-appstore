@@ -8,7 +8,7 @@ id: g-d-app-store-gd-angel
 
 category: Networking
 name: ANGEL
-version: "1.29.1"
+version: "1.29.2"
 tagline: Il custode del tuo server Discord
 
 description: >
@@ -84,6 +84,13 @@ releaseNotes: >
 
   - Postgres riceve la password da un file (`POSTGRES_PASSWORD_FILE`) e monta
     quella cartella in sola lettura.
+
+
+  - Correzione della 1.29.1: su un'installazione nuova Postgres non partiva,
+    e diceva `/segreti/postgres_password: No such file or directory`. Le
+    cartelle di bind-mount le crea Docker di root, e ANGEL gira con uid
+    1000: non poteva scrivere la password. Adesso un container sistema il
+    proprietario al primo avvio, e non c'è nessun comando da dare a mano.
 
 
   Aggiornando da una versione precedente: se avevi già un `segreti.env` in
