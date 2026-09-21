@@ -8,7 +8,7 @@ id: g-d-app-store-gd-angel
 
 category: Networking
 name: ANGEL
-version: "1.30.0"
+version: "1.31.0"
 tagline: Il custode del tuo server Discord
 
 description: >
@@ -65,62 +65,52 @@ defaultUsername: ""
 defaultPassword: ""
 
 releaseNotes: >
-  Nel compose non c'è più nessun dato sensibile.
+  Il file dei segreti nasce già scritto, e i comandi tornano alla strada che
+  funzionava.
 
 
-  - Token, chiavi e password vivono in `app-data/…/data/segreti/`, una
-    cartella con i permessi stretti che gli aggiornamenti non toccano. Il
-    compose viene riscritto dal repository a ogni aggiornamento, e adesso non
-    c'è più niente da rimettere: contiene solo dove trovare i valori.
+  - **Non c'è più un file vuoto da compilare a memoria.** Al primo avvio ANGEL
+    scrive lui `segreti.env`, con i campi già presenti — uno per riga, e
+    accanto dove si prende quel valore. Restano da riempire i vuoti. I
+    facoltativi (Twitch, le chiavi dello scanner) stanno lì commentati: si
+    usano togliendo il cancelletto.
 
-  - Da scrivere a mano restano cinque righe — token, applicazione Discord,
-    indirizzo del pannello, il tuo ID. Segreto di sessione, chiave di
-    cifratura e password del database ANGEL se li genera al primo avvio.
+  - **Il file che hai già non viene toccato.** Il modello si scrive solo
+    quando non c'è niente da salvare. Se il tuo `segreti.env` sta ancora nella
+    cartella di prima, viene copiato in quella nuova invece che sostituito, e
+    l'originale resta dov'è.
 
-  - Se manca qualcosa, il bot non si riavvia in ciclo: parte solo il pannello
-    e il resto **aspetta**, ricontrollando ogni quindici secondi. Appena i
-    valori ci sono parte da solo, senza riavviare l'app. Nei log compaiono i
-    nomi, mai i valori.
+  - **I comandi del pannello tornano al percorso delle versioni precedenti.**
+    Dalla 1.28 lockdown, backup e test passavano per un meccanismo nuovo, e da
+    lì in poi hanno smesso di arrivare al bot: il pannello diceva «ci sto
+    lavorando» e non succedeva niente. Questa versione riporta quel pezzo a
+    com'era quando funzionava. È un passo indietro fatto apposta, per capire
+    con certezza da dove viene il guasto.
 
-  - Postgres riceve la password da un file (`POSTGRES_PASSWORD_FILE`) e monta
-    quella cartella in sola lettura.
-
-
-  - Il pannello diceva «bot: fermo» e «il bot non è collegato» di un bot che
-    invece era collegato e funzionava, e i comandi risultavano non eseguiti.
-    È lo stesso guasto: il pannello non guarda il bot, guarda tre chiavi che
-    il bot scrive su Redis — versione, battito, esito dei comandi. Se una di
-    quelle scritture falliva, il fallimento spariva e restavano solo i
-    sintomi. Ora ogni modo di fallire finisce nei log, compreso quello che
-    inganna di più: Redis che non risponde e accoda il comando invece di
-    rifiutarlo, dove «nessun errore» non vuol dire «scritto».
+  - **Cosa manca, di conseguenza:** la copia leggera su Discord — il canale
+    dove il bot pubblicava i file di riepilogo — non c'è in questa versione.
+    Torna appena i comandi sono di nuovo affidabili. I backup sul server
+    restano.
 
 
-  - «512 minacce oggi» con zero minacce vere: il contatore prendeva tutta la
-    categoria SECURITY, dentro cui stanno anche gli snapshot che ANGEL si fa
-    da solo. Ora conta solo quello che è stato tentato contro il server.
+  Una cosa da sapere mentre provi: a questa versione, se un comando si perde
+  per strada, **il pannello dice lo stesso che è andato a buon fine**. Non
+  fidarti del pannello: dopo un lockdown guarda i canali su Discord.
 
 
-  - Correzione della 1.29.2: nei log comparivano uno snapshot ogni due
-    secondi e promemoria «scaduto» a ripetizione. Non era uno scheduler
-    impazzito: erano gli stessi comandi, riconsegnati e rieseguiti per
-    sempre. Bastava una voce che non si riusciva a confermare perché tutta
-    la coda ripartisse a ogni giro. Ora il recupero avanza invece di
-    ricominciare, e ogni comando si conferma anche quando fallisce.
-
-
-  - Correzione della 1.29.1: su un'installazione nuova Postgres non partiva,
-    e diceva `/segreti/postgres_password: No such file or directory`. Le
-    cartelle di bind-mount le crea Docker di root, e ANGEL gira con uid
-    1000: non poteva scrivere la password. Adesso un container sistema il
-    proprietario al primo avvio, e non c'è nessun comando da dare a mano.
+  Il resto del sistema dei segreti è quello della 1.30. Token, chiavi e
+  password vivono in `app-data/…/data/segreti/`, una cartella con i permessi
+  stretti che gli aggiornamenti non toccano. Segreto di sessione, chiave di
+  cifratura e password del database se li genera ANGEL al primo avvio;
+  Postgres riceve la sua da un file (`POSTGRES_PASSWORD_FILE`) e monta quella
+  cartella in sola lettura. Se manca qualcosa parte solo il pannello e il
+  resto aspetta, ricontrollando ogni quindici secondi. Nei log compaiono i
+  nomi, mai i valori.
 
 
   Aggiornando da una versione precedente: se avevi già un `segreti.env` in
   `data/storage` viene letto lo stesso, e nei log trovi il comando per
-  spostarlo. Se invece i valori erano solo nel compose, travasali **prima** di
-  aggiornare con lo script `docker/segreti.sh` — le istruzioni sono nel
-  README dello store.
+  spostarlo.
 
 submitter: Gigiomiccio425
 submission: https://github.com/Gigiomiccio425/aegis-discord-bot
