@@ -1,0 +1,55 @@
+manifestVersion: 1
+id: g-d-app-store-gd-insta-scheduler
+category: Social
+name: GD Insta Scheduler
+version: "1.0.0"
+tagline: Programma e pubblica post su Instagram
+icon: https://raw.githubusercontent.com/Gigiomiccio425/Gigio-dany-appstore/master/g-d-app-store-gd-insta-scheduler/exports/icon.png
+description: >
+  Programma e pubblica automaticamente post su Instagram dal tuo Umbrel,
+  senza passare da servizi cloud.
+
+
+  Cosa fa:
+
+
+  - Colleghi l'account Instagram Business/Creator via Instagram Graph API
+    (Access Token + IG User ID, con test di connessione integrato)
+
+  - Carichi immagini (JPG/PNG/WebP) o video (MP4), anche in carosello fino
+    a 10 media, scrivi la caption e scegli data e ora di pubblicazione
+
+  - Un cron interno controlla ogni minuto i post in coda e li pubblica da
+    solo; stati `bozza`, `programmato`, `pubblicato`, `errore`, con log
+    consultabili e pulsanti «Pubblica ora» / «Riprova»
+
+  - Calendario mensile dei post programmati, lista delle bozze, cronologia
+    degli invii con link al permalink Instagram
+
+
+  Nota importante: Meta scarica i media da un URL pubblico, quindi serve
+  `PUBLIC_URL` raggiungibile (dominio, Tailscale o `http://umbrel.local:8757`
+  in rete locale). Database SQLite e upload stanno in `/data`, persistenti
+  agli aggiornamenti.
+
+developer: Gigiomiccio425
+website: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+dependencies: []
+repo: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+support: https://github.com/Gigiomiccio425/Gigio-dany-appstore/issues
+port: 8757
+gallery:
+  - https://raw.githubusercontent.com/Gigiomiccio425/Gigio-dany-appstore/master/g-d-app-store-gd-insta-scheduler/exports/screenshot-1.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >
+  Prima versione per questo store: scheduler Instagram 1.0.0 con Express +
+  SQLite + cron ogni minuto, upload immagini/video, caroselli, calendario e
+  pubblicazione via Instagram Graph API.
+
+
+  Per aggiornare in futuro: cambia il tag immagine in `docker-compose.yml`
+  e la `version` qui sopra, poi aggiorna l'app da umbrelOS.
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore

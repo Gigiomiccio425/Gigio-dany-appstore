@@ -4,3 +4,9 @@
 .env
 .env.*
 !.env.example
+# Build/runtime effimeri (app JS)
+node_modules/
+*/data/*.db*
+*/data/*.db-*
+*/data/uploads/*
+*/data/scheduler.db*

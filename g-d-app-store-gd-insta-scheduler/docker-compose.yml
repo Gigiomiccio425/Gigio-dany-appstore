@@ -1,0 +1,44 @@
+# ─────────────────────────────────────────────────────────────
+#  GD Insta Scheduler — app per umbrelOS
+#
+#  Scheduler Instagram self-hosted: Express + SQLite + cron interno che
+#  pubblica via Instagram Graph API ogni minuto.
+#
+#  Convenzioni umbrelOS rispettate (come le altre app dello store):
+#  • `app_proxy` pubblica l'app: APP_HOST = <id-app>_<servizio>_1
+#  • niente `ports:` (la espone il proxy) e niente `container_name`
+#  • persistenza in ${APP_DATA_DIR}/data -> /data (DB + uploads)
+#  • tag immagine fissato (non `latest`): umbrelOS rileva gli aggiornamenti
+#    dalla `version` in umbrel-app.yml
+#  • i segreti (IG token) NON stanno qui: si inseriscono dalla UI e finiscono
+#    in SQLite sotto /data, che gli aggiornamenti non toccano
+# ─────────────────────────────────────────────────────────────
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-insta-scheduler_insta-scheduler_1
+      APP_PORT: 8757
+      PROXY_AUTH_ADD: "false"
+
+  insta-scheduler:
+    image: ghcr.io/gigiomiccio425/insta-scheduler:1.0.0
+    restart: on-failure
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      PORT: 8757
+      DATA_DIR: /data
+      TZ: ${TZ:-Europe/Rome}
+      # Come Meta raggiunge i media per scaricarli (dominio/Tailscale/LAN).
+      # Si può cambiare anche dalla UI dopo l'installazione.
+      PUBLIC_URL: ${PUBLIC_URL:-http://umbrel.local:8757}
+      IG_API_VERSION: ${IG_API_VERSION:-v21.0}
+    volumes:
+      # scheduler.db + uploads/ + settings (token IG)
+      - ${APP_DATA_DIR}/data:/data
