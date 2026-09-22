@@ -23,7 +23,7 @@ disinstallano come tutte le altre.
 
 | App | Cosa fa | Porta | Versione |
 |---|---|---|---|
-| **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.29.2` |
+| **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.31.1` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
