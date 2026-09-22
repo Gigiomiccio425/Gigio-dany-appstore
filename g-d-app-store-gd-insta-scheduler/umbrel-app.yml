@@ -2,7 +2,7 @@ manifestVersion: 1
 id: g-d-app-store-gd-insta-scheduler
 category: Social
 name: GD Insta Scheduler
-version: "1.0.0"
+version: "1.0.1"
 tagline: Programma e pubblica post su Instagram
 icon: https://raw.githubusercontent.com/danyx67800/insta-scheduler/main/exports/icon.png
 description: >
@@ -44,12 +44,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >
-  Prima versione per questo store: scheduler Instagram 1.0.0 con Express +
-  SQLite + cron ogni minuto, upload immagini/video, caroselli, calendario e
-  pubblicazione via Instagram Graph API.
-
-
-  Per aggiornare in futuro: cambia il tag immagine in `docker-compose.yml`
-  e la `version` qui sopra, poi aggiorna l'app da umbrelOS.
+  Fix crash all'avvio (EACCES su /data): l'entrypoint ora ripara
+  l'ownership del volume Umbrel e poi esegue node come utente non-root.
+  Versione health-check e tag Docker letti da package.json.
 submitter: Gigiomiccio425
 submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore

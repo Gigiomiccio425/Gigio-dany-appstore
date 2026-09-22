@@ -25,7 +25,7 @@ services:
   insta-scheduler:
     # Sorgenti + build: https://github.com/danyx67800/insta-scheduler
     # (build multi-arch amd64/arm64 via GitHub Actions su GHCR)
-    image: ghcr.io/danyx67800/insta-scheduler:1.0.0
+    image: ghcr.io/danyx67800/insta-scheduler:1.0.1
     restart: on-failure
     stop_grace_period: 30s
     logging:

@@ -28,7 +28,7 @@ disinstallano come tutte le altre.
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
 | **[GD Magazzino](g-d-app-store-gd-magazzino/)** | Gestione semplice di un magazzino | 8000 | `1.1.1` |
-| **[GD Insta Scheduler](g-d-app-store-gd-insta-scheduler/)** | Programma e pubblica post su Instagram via Graph API | 8757 | `1.0.0` |
+| **[GD Insta Scheduler](g-d-app-store-gd-insta-scheduler/)** | Programma e pubblica post su Instagram via Graph API | 8757 | `1.0.1` |
 | **[Spotify Stats](g-d-app-store-gd-spotify-stats/)** | Il tuo storico Spotify, archiviato per sempre | 8787 | `0.2.0` |
 
 Beszel e Beszel Agent sono due app distinte perché fanno due mestieri opposti: la prima raccoglie
