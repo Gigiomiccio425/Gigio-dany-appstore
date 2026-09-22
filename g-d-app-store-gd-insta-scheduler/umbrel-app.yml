@@ -4,7 +4,7 @@ category: Social
 name: GD Insta Scheduler
 version: "1.0.0"
 tagline: Programma e pubblica post su Instagram
-icon: https://raw.githubusercontent.com/Gigiomiccio425/Gigio-dany-appstore/master/g-d-app-store-gd-insta-scheduler/exports/icon.png
+icon: https://raw.githubusercontent.com/danyx67800/insta-scheduler/main/exports/icon.png
 description: >
   Programma e pubblica automaticamente post su Instagram dal tuo Umbrel,
   senza passare da servizi cloud.
@@ -33,13 +33,13 @@ description: >
   agli aggiornamenti.
 
 developer: Gigiomiccio425
-website: https://github.com/Gigiomiccio425/Gigio-dany-appstore
+website: https://github.com/danyx67800/insta-scheduler
 dependencies: []
-repo: https://github.com/Gigiomiccio425/Gigio-dany-appstore
-support: https://github.com/Gigiomiccio425/Gigio-dany-appstore/issues
+repo: https://github.com/danyx67800/insta-scheduler
+support: https://github.com/danyx67800/insta-scheduler/issues
 port: 8757
 gallery:
-  - https://raw.githubusercontent.com/Gigiomiccio425/Gigio-dany-appstore/master/g-d-app-store-gd-insta-scheduler/exports/screenshot-1.png
+  - https://raw.githubusercontent.com/danyx67800/insta-scheduler/main/exports/icon.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
