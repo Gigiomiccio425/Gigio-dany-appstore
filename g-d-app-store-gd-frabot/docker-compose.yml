@@ -8,8 +8,8 @@
 #  • `app_proxy` pubblica il pannello con il login di Umbrel
 #    (nessun PROXY_AUTH_ADD: il default è già l'autenticazione).
 #  • Niente `ports:`: la porta la apre app_proxy.
-#  • La porta esterna è 8081 (la 8080 è già di GD AMP). Quella
-#    interna resta 8080, dove ascolta uvicorn.
+#  • La porta esterna è 8417, poco comune e libera (la 8080 è già
+#    di GD AMP). Quella interna resta 8080, dove ascolta uvicorn.
 #  • Tag immagine fissato: umbrelOS confronta la `version` del
 #    manifest e scarica esattamente quella.
 # ─────────────────────────────────────────────────────────────

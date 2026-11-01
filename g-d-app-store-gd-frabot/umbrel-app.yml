@@ -42,9 +42,9 @@ dependencies: []
 repo: https://github.com/danyx67800/frabot
 support: https://github.com/danyx67800/frabot/issues
 
-# 8081 perché la 8080 è già usata da GD AMP in questo store. La porta interna
-# del container resta 8080: app_proxy la inoltra.
-port: 8081
+# 8417 è una porta poco comune e libera in questo store: la 8080 è già di
+# GD AMP. La porta interna del container resta 8080: app_proxy la inoltra.
+port: 8417
 
 icon: https://raw.githubusercontent.com/danyx67800/frabot/main/frabot-frabot/icon.svg
 gallery:
