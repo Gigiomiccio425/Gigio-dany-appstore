@@ -37,7 +37,7 @@ services:
 
   web:
     # Sorgenti e workflow: https://github.com/danyx67800/frabot
-    image: ghcr.io/danyx67800/frabot:1.0.0
+    image: ghcr.io/danyx67800/frabot:1.0.1
     restart: unless-stopped
     init: true
     stop_grace_period: 30s
