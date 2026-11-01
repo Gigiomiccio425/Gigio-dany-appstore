@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+#  FraBot — app per umbrelOS
+#
+#  Un solo container: bot Discord (discord.py) e pannello FastAPI.
+#  SQLite e transcript stanno in ${APP_DATA_DIR}/data, che gli
+#  aggiornamenti dell'app non toccano.
+#
+#  • `app_proxy` pubblica il pannello con il login di Umbrel
+#    (nessun PROXY_AUTH_ADD: il default è già l'autenticazione).
+#  • Niente `ports:`: la porta la apre app_proxy.
+#  • La porta esterna è 8081 (la 8080 è già di GD AMP). Quella
+#    interna resta 8080, dove ascolta uvicorn.
+#  • Tag immagine fissato: umbrelOS confronta la `version` del
+#    manifest e scarica esattamente quella.
+# ─────────────────────────────────────────────────────────────
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-frabot_web_1
+      APP_PORT: 8080
+
+  # I bind mount creati da Docker possono appartenere a root. Il bot
+  # gira come UID 1000 e in una cartella di root non può creare il
+  # database: questo container prepara i permessi e termina. Se il web
+  # parte prima che abbia finito, riparte da solo.
+  prepara:
+    image: alpine:3
+    restart: "no"
+    command:
+      - sh
+      - -c
+      - "mkdir -p /data && chown -R 1000:1000 /data"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+
+  web:
+    # Sorgenti e workflow: https://github.com/danyx67800/frabot
+    image: ghcr.io/danyx67800/frabot:1.0.0
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    user: "1000:1000"
+    environment:
+      FRABOT_DATA_DIR: /data
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    depends_on:
+      - prepara
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

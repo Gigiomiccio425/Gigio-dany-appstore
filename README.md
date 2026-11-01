@@ -2,7 +2,7 @@
 
 # Gigio &amp; Dany — Community App Store
 
-Sette app per [umbrelOS](https://umbrel.com), installabili in due clic.
+Otto app per [umbrelOS](https://umbrel.com), installabili in due clic.
 
 </div>
 
@@ -23,7 +23,8 @@ disinstallano come tutte le altre.
 
 | App | Cosa fa | Porta | Versione |
 |---|---|---|---|
-| **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.31.1` |
+| **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.32.0` |
+| **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8081 | `1.0.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
@@ -39,8 +40,8 @@ macchine, un Beszel e tanti agent.
 
 ## ANGEL: la prima configurazione
 
-È l'unica app dello store che chiede qualcosa prima di funzionare. Serve un bot Discord tuo, e il
-suo token non può stare nel `docker-compose.yml`.
+ANGEL chiede un bot Discord e un file di segreti prima di funzionare. Il suo token non può stare
+nel `docker-compose.yml`.
 
 ### Perché non nel compose
 
@@ -100,6 +101,27 @@ Travaso dei valori da una versione precedente, password del database da rialline
 comandi, pannello:
 
 **[Documentazione di ANGEL](https://github.com/Gigiomiccio425/aegis-discord-bot/tree/main/docs)**
+
+---
+
+## FraBot: la prima configurazione
+
+FraBot si configura interamente dal pannello: non serve modificare file né impostare variabili
+d'ambiente. Dopo l'installazione:
+
+1. Apri FraBot dallo store. Il pannello passa dal login di Umbrel.
+2. Segui il wizard in 7 passaggi: crea l'app Discord, incolla Application ID e Bot Token, invita il
+   bot, scegli il server e i moduli, collega Twitch se ti serve e invia il messaggio di prova.
+3. Alla fine si apre la Dashboard. Ticket, mini giochi e annunci Twitch si gestiscono da lì.
+
+Il token Discord e il Client Secret Twitch stanno nel database del volume `/data`, non nel
+compose. Non vengono mai restituiti dalle API e vengono rimossi dai log. Il pannello è protetto
+dal login di Umbrel; se lo esponi fuori da Umbrel, mettilo dietro un reverse proxy con
+autenticazione.
+
+Gli aggiornamenti dell'app conservano `/data`, quindi configurazione, ticket, transcript e saldi
+restano. Il codice e il workflow dell'immagine sono in
+[**danyx67800/frabot**](https://github.com/danyx67800/frabot).
 
 ---
 

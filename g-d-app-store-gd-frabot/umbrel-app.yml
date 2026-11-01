@@ -1,0 +1,68 @@
+manifestVersion: 1
+
+# Deve cominciare con l'id dello store (g-d-app-store) e la cartella deve
+# chiamarsi esattamente così: è anche il prefisso dei nomi dei container.
+id: g-d-app-store-gd-frabot
+
+category: Social
+name: FraBot
+version: "1.0.0"
+tagline: Bot Discord self-hosted con pannello web in italiano
+
+description: |
+  FraBot è un bot Discord self-hosted che si configura interamente dal browser:
+  nessun file da modificare e nessuna variabile d'ambiente da impostare a mano.
+
+
+  Include un wizard in 7 passaggi che verifica il token Discord, genera il link
+  di invito, controlla che il bot sia davvero nel server e invia un messaggio di
+  prova.
+
+
+  Moduli disponibili:
+
+
+  - Ticket: pannello con pulsanti, categorie, canali privati, presa in carico,
+    chiusura automatica e transcript HTML nel canale log e in DM.
+
+  - Mini giochi: Tris, Indovina il numero, Quiz, Pietra-carta-forbice, dado,
+    moneta e slot, con economia virtuale opzionale, classifiche ed editor del
+    quiz.
+
+  - Annunci Twitch: polling ogni 60 secondi, deduplica per stream, menzioni e
+    template personalizzabili per ogni streamer.
+
+
+  Tutto gira in un solo container, con SQLite in /data e pannello protetto dal
+  login di Umbrel. Non richiede l'intent privilegiato Message Content.
+
+developer: danyx67800
+website: https://github.com/danyx67800/frabot
+dependencies: []
+repo: https://github.com/danyx67800/frabot
+support: https://github.com/danyx67800/frabot/issues
+
+# 8081 perché la 8080 è già usata da GD AMP in questo store. La porta interna
+# del container resta 8080: app_proxy la inoltra.
+port: 8081
+
+icon: https://raw.githubusercontent.com/danyx67800/frabot/main/frabot-frabot/icon.svg
+gallery:
+  - https://raw.githubusercontent.com/danyx67800/frabot/main/frabot-frabot/gallery/1.png
+  - https://raw.githubusercontent.com/danyx67800/frabot/main/frabot-frabot/gallery/2.png
+  - https://raw.githubusercontent.com/danyx67800/frabot/main/frabot-frabot/gallery/3.png
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+
+releaseNotes: |-
+  Prima versione pubblica.
+
+  Include configurazione guidata, modulo ticket con transcript, sette mini
+  giochi con economia virtuale, annunci live Twitch e pannello di gestione
+  completo in italiano. I segreti restano nel volume /data e non vengono mai
+  restituiti dalle API.
+
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
