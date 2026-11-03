@@ -7,7 +7,7 @@ id: g-d-app-store-gd-bot-nuke
 
 category: Social
 name: Bot Nuke
-version: "1.0.0"
+version: "1.0.1"
 tagline: Caos controllato per il tuo evento Discord
 
 description: |
@@ -48,9 +48,13 @@ defaultUsername: ""
 defaultPassword: ""
 
 releaseNotes: |-
-  Prima versione per umbrelOS: loop di nomi e ordine dei canali, burst di
-  messaggi, dashboard con procedura guidata in sei passi, dry run, snapshot e
-  ripristino dei canali originali.
+  Corregge il passo 2 della configurazione: dopo aver invitato il bot in un
+  server, l'elenco si aggiorna da solo senza ricaricare la pagina. In più c'è il
+  pulsante "Ricontrolla i server", il nome del bot connesso quando l'elenco è
+  vuoto e il log che segnala ingresso e uscita dal server.
+
+  La versione mostrata dalla dashboard ora arriva da package.json, così non può
+  divergere da quella del manifest.
 
 submitter: Gigiomiccio425
 submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
