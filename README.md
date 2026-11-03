@@ -2,7 +2,7 @@
 
 # Gigio &amp; Dany — Community App Store
 
-Otto app per [umbrelOS](https://umbrel.com), installabili in due clic.
+Nove app per [umbrelOS](https://umbrel.com), installabili in due clic.
 
 </div>
 
@@ -25,6 +25,7 @@ disinstallano come tutte le altre.
 |---|---|---|---|
 | **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.32.0` |
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
+| **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop e ripete messaggi, con dashboard guidata | 4321 | `1.0.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
@@ -122,6 +123,32 @@ autenticazione.
 Gli aggiornamenti dell'app conservano `/data`, quindi configurazione, ticket, transcript e saldi
 restano. Il codice e il workflow dell'immagine sono in
 [**danyx67800/frabot**](https://github.com/danyx67800/frabot).
+
+---
+
+## Bot Nuke: la prima configurazione
+
+Bot Nuke non fa niente finché non glielo dici tu, e si configura tutto dal browser: nessun file da
+modificare e nessun token nel compose.
+
+1. Apri Bot Nuke dallo store. La dashboard ha una password sua, diversa da quella di Umbrel: la
+   scegli al primo accesso.
+2. Crea l'app su Discord e incolla il token al passo 1. Lì accanto c'è il pulsante che invita il bot
+   con i permessi già calcolati: Gestire i canali, Vedere i canali, Inviare messaggi.
+3. Scegli server e canali, scrivi i nomi a rotazione (uno per riga), i testi dei messaggi e i tempi.
+4. Al passo 6 lascia acceso il **dry run**: il bot calcola tutto e scrive nel log cosa farebbe, senza
+   toccare Discord. Quando ti convince, spegnilo e avvia il loop.
+
+Il **Panic** ferma il loop e rimette nomi e ordine di prima. Lo snapshot viene preso al primo avvio
+del loop, quindi conviene avviarlo una volta prima dell'evento: se lo snapshot non c'è, il pulsante
+resta disattivato.
+
+I limiti non si aggirano: Discord concede 2 rinomine per canale ogni 10 minuti e 2 riordini per
+server ogni 10 minuti. Con un intervallo corto il bot rimanda le azioni in eccesso — e in dashboard
+vedi il countdown di ogni canale — invece di prendere errori.
+
+Il token resta in `/data`, dentro il volume dell'app. Codice e workflow dell'immagine sono in
+[**danyx67800/Bot_nuke**](https://github.com/danyx67800/Bot_nuke).
 
 ---
 

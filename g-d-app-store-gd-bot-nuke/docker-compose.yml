@@ -1,0 +1,44 @@
+# ─────────────────────────────────────────────────────────────
+#  Bot Nuke — app per umbrelOS
+#
+#  Un solo container: bot Discord e dashboard web (Express).
+#  Config, token del bot e chiave delle sessioni stanno in
+#  ${APP_DATA_DIR}/data, che gli aggiornamenti dell'app non toccano.
+#
+#  • `app_proxy` pubblica la dashboard con il login di Umbrel.
+#  • Niente `ports:`: la porta la apre app_proxy.
+#  • Sorgenti e workflow dell'immagine:
+#    https://github.com/danyx67800/Bot_nuke
+#  • Tag fissato: umbrelOS confronta la `version` del manifest e
+#    scarica esattamente quella.
+# ─────────────────────────────────────────────────────────────
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-bot-nuke_server_1
+      APP_PORT: 4321
+
+  server:
+    image: ghcr.io/danyx67800/bot-nuke:1.0.0
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 15s
+    environment:
+      PORT: "4321"
+      DATA_DIR: /data
+      TZ: Europe/Rome
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4321/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

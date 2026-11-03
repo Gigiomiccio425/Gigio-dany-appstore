@@ -1,0 +1,56 @@
+manifestVersion: 1
+
+# L'id deve cominciare con quello dello store (g-d-app-store) e la cartella
+# deve chiamarsi esattamente così: è anche il prefisso dei nomi dei container,
+# quindi la stringa che finisce in APP_HOST nel compose.
+id: g-d-app-store-gd-bot-nuke
+
+category: Social
+name: Bot Nuke
+version: "1.0.0"
+tagline: Caos controllato per il tuo evento Discord
+
+description: |
+  Bot Nuke fa animare il server durante l'evento: cambia in loop i nomi dei
+  canali, ne rimescola l'ordine e ripete in chat i messaggi che decidi tu.
+
+
+  Tutto si comanda da una dashboard web con configurazione guidata in sei
+  passaggi: token del bot, server, canali, nomi e ordine, messaggi e tempi.
+  Ogni passo mostra l'anteprima dei tick successivi, così sai già cosa
+  succederà prima di avviare il loop.
+
+
+  Rispetta i limiti di Discord invece di sbatterci contro: le rinomine
+  (2 per canale ogni 10 minuti) e i riordini (2 per server ogni 10 minuti)
+  passano da una coda che rimanda le azioni in eccesso, e i messaggi vengono
+  spalmati automaticamente. In dashboard vedi il budget residuo e il countdown
+  di ogni canale.
+
+
+  Include dry run, log in tempo reale, snapshot dei nomi originali e un
+  pulsante Panic che ferma il loop e ripristina i canali.
+
+developer: danyx67800
+website: https://github.com/danyx67800/Bot_nuke
+dependencies: []
+repo: https://github.com/danyx67800/Bot_nuke
+support: https://github.com/danyx67800/Bot_nuke/issues
+
+# 4321 è libera in questo store. La porta interna del container resta 4321,
+# app_proxy la inoltra con il login di Umbrel davanti.
+port: 4321
+
+icon: https://raw.githubusercontent.com/danyx67800/Bot_nuke/main/public/favicon.svg
+
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+
+releaseNotes: |-
+  Prima versione per umbrelOS: loop di nomi e ordine dei canali, burst di
+  messaggi, dashboard con procedura guidata in sei passi, dry run, snapshot e
+  ripristino dei canali originali.
+
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
