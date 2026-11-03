@@ -7,7 +7,7 @@ id: g-d-app-store-gd-bot-nuke
 
 category: Social
 name: Bot Nuke
-version: "1.0.2"
+version: "1.0.3"
 tagline: Caos controllato per il tuo evento Discord
 
 description: |
@@ -48,9 +48,9 @@ defaultUsername: ""
 defaultPassword: ""
 
 releaseNotes: |-
-  Corregge l'errore "Errore interno del server." che compariva premendo
-  "Ricontrolla i server": le icone dei server venivano richieste a 96px, una
-  dimensione che Discord non accetta (ammesse solo le potenze di 2), e la
-  richiesta falliva. Ora la lista dei server arriva con le icone a 128px.
+  I messaggi possono ora essere inviati in tutti i canali di testo del server
+  (impostazione predefinita) invece che in uno solo. La scelta si fa al passo 3
+  della configurazione: "Tutti i canali di testo" oppure "Un solo canale".
+  Il limite di Discord (circa 5 messaggi ogni 5 secondi) resta per canale.
 submitter: Gigiomiccio425
 submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
