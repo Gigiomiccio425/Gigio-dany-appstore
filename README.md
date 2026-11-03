@@ -25,12 +25,12 @@ disinstallano come tutte le altre.
 |---|---|---|---|
 | **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.32.0` |
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
-| **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop e ripete messaggi, con dashboard guidata | 4321 | `1.0.1` |
+| **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop e ripete messaggi, con dashboard guidata | 4321 | `1.0.2` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
 | **[GD Magazzino](g-d-app-store-gd-magazzino/)** | Gestione semplice di un magazzino | 8000 | `1.1.1` |
-| **[GD Insta Scheduler](g-d-app-store-gd-insta-scheduler/)** | Programma e pubblica post su Instagram via Graph API | 8757 | `1.0.1` |
+| **[GD Insta Scheduler](g-d-app-store-gd-insta-scheduler/)** | Programma e pubblica post su Instagram via Graph API | 8757 | `1.0.2` |
 | **[Spotify Stats](g-d-app-store-gd-spotify-stats/)** | Il tuo storico Spotify, archiviato per sempre | 8787 | `0.2.0` |
 
 Beszel e Beszel Agent sono due app distinte perché fanno due mestieri opposti: la prima raccoglie
