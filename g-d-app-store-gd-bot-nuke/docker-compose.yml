@@ -21,7 +21,7 @@ services:
       APP_PORT: 4321
 
   server:
-    image: ghcr.io/danyx67800/bot-nuke:1.0.3
+    image: ghcr.io/danyx67800/bot-nuke:1.1.0
     restart: unless-stopped
     init: true
     stop_grace_period: 15s

@@ -7,7 +7,7 @@ id: g-d-app-store-gd-bot-nuke
 
 category: Social
 name: Bot Nuke
-version: "1.0.3"
+version: "1.1.0"
 tagline: Caos controllato per il tuo evento Discord
 
 description: |
@@ -31,6 +31,12 @@ description: |
   Include dry run, log in tempo reale, snapshot dei nomi originali e un
   pulsante Panic che ferma il loop e ripristina i canali.
 
+
+  Dalla Panoramica puoi anche creare canali all'infinito: un canale di testo
+  nuovo ogni N secondi, con prefisso e numero progressivo, finché non premi
+  Ferma. Il loop si blocca da solo al tetto di 500 canali di Discord e il Panic
+  elimina i canali creati, oltre a ripristinare nomi e ordine.
+
 developer: danyx67800
 website: https://github.com/danyx67800/Bot_nuke
 dependencies: []
@@ -48,9 +54,9 @@ defaultUsername: ""
 defaultPassword: ""
 
 releaseNotes: |-
-  I messaggi possono ora essere inviati in tutti i canali di testo del server
-  (impostazione predefinita) invece che in uno solo. La scelta si fa al passo 3
-  della configurazione: "Tutti i canali di testo" oppure "Un solo canale".
-  Il limite di Discord (circa 5 messaggi ogni 5 secondi) resta per canale.
+  Novità 1.1.0: creazione canali all'infinito dalla Panoramica. Scegli prefisso
+  e intervallo, il bot aggiunge un canale di testo a ogni giro e si ferma da solo
+  al tetto di 500 canali di Discord. Il Panic elimina i canali creati, oltre a
+  ripristinare nomi e ordine originali.
 submitter: Gigiomiccio425
 submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
