@@ -25,7 +25,7 @@ disinstallano come tutte le altre.
 |---|---|---|---|
 | **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.32.0` |
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
-| **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop, crea canali all. infinito e ripete messaggi, con dashboard guidata | 4321 | `1.1.0` |
+| **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop, crea canali all'infinito e ripete messaggi, con dashboard guidata | 4321 | `1.1.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
 | **[GD AMP](g-d-app-store-gd-amp/)** | Pannello CubeCoders AMP per server di gioco (immagine Docker non ufficiale) | 8080 | `2.7.2-1` |
