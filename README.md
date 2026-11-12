@@ -23,7 +23,6 @@ disinstallano come tutte le altre.
 
 | App | Cosa fa | Porta | Versione |
 |---|---|---|---|
-| **[ANGEL](g-d-app-store-gd-angel/)** | Bot Discord di sicurezza e moderazione, con pannello web. Dentro c'è anche un bot di chat Twitch | 780, 781 | `1.32.0` |
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
 | **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop, crea canali all'infinito e ripete messaggi, con dashboard guidata | 4321 | `1.1.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
@@ -36,72 +35,6 @@ disinstallano come tutte le altre.
 Beszel e Beszel Agent sono due app distinte perché fanno due mestieri opposti: la prima raccoglie
 e mostra, la seconda si limita a farsi misurare. Su una macchina sola servono entrambe; su più
 macchine, un Beszel e tanti agent.
-
----
-
-## ANGEL: la prima configurazione
-
-ANGEL chiede un bot Discord e un file di segreti prima di funzionare. Il suo token non può stare
-nel `docker-compose.yml`.
-
-### Perché non nel compose
-
-Il compose di un'app umbrelOS **appartiene a questo repository**: viene riscritto da qui a ogni
-aggiornamento. Un token messo lì dentro sparirebbe al primo aggiornamento — e nel frattempo
-starebbe in chiaro in un file leggibile da chiunque abbia accesso alla macchina.
-
-C'è anche un secondo motivo, indipendente: GitHub riconosce il formato dei token Discord e
-**rifiuta il push** con `GH013`. E Discord analizza le repository pubbliche e revoca i token che
-trova.
-
-### Dove stanno invece
-
-In una cartella dentro i dati dell'app, che gli aggiornamenti non toccano:
-
-```bash
-ssh umbrel@umbrel.local
-nano ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti/segreti.env
-```
-
-Cinque righe, una per valore, senza virgolette:
-
-```
-DISCORD_TOKEN=il.tuo.token
-DISCORD_CLIENT_ID=il-tuo-client-id
-DISCORD_CLIENT_SECRET=il-tuo-client-secret
-PUBLIC_URL=http://il-tuo-umbrel:780
-OWNER_IDS=il-tuo-id-discord
-```
-
-Poi chiudilo agli altri:
-
-```bash
-chmod 600 ~/umbrel/app-data/g-d-app-store-gd-angel/data/segreti/segreti.env
-```
-
-Il segreto di sessione, la chiave di cifratura e la password del database **non vanno scritti**:
-sono numeri casuali, ANGEL se li genera al primo avvio e se li salva lì dentro.
-
-### Finché manca qualcosa
-
-Parte **solo il pannello**, e il bot aspetta: ricontrolla ogni quindici secondi e parte da solo
-appena i valori ci sono, senza riavviare l'app. Nei log compaiono i nomi letti, mai i valori.
-
-### L'indirizzo deve combaciare in tre punti
-
-`PUBLIC_URL` segreto non è, ma va scritto lì lo stesso: nel compose tornerebbe a `umbrel.local` a
-ogni aggiornamento, e l'accesso al pannello fallirebbe con «stato non valido», che non spiega
-niente.
-
-Lo stesso indirizzo, seguito da `/api/auth/callback`, deve stare su Discord in
-**OAuth2 → Redirects**. Browser, `segreti.env` e Discord: tutti e tre uguali.
-
-### Il resto
-
-Travaso dei valori da una versione precedente, password del database da riallineare, backup,
-comandi, pannello:
-
-**[Documentazione di ANGEL](https://github.com/Gigiomiccio425/aegis-discord-bot/tree/main/docs)**
 
 ---
 
@@ -157,7 +90,7 @@ Il token resta in `/data`, dentro il volume dell'app. Codice e workflow dell'imm
 ```
 Gigio-dany-appstore/
   umbrel-app-store.yml          id e nome dello store
-  g-d-app-store-gd-angel/
+  g-d-app-store-gd-frabot/
     umbrel-app.yml              la scheda che umbrelOS mostra
     docker-compose.yml          i servizi
   …una cartella per app
