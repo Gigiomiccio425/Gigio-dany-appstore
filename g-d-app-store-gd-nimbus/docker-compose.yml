@@ -38,7 +38,10 @@ services:
       PORT: "3000"
       HOST: 0.0.0.0
       TRUST_PROXY: "true"
-      REQUIRE_HTTPS: "true"
+      # Umbrel's app_proxy may not forward X-Forwarded-Proto; the manifest's
+      # requiresHttps already forces the browser to HTTPS. Secure cookies make
+      # a plain-HTTP session unusable, so this internal hop stays HTTP-safe.
+      REQUIRE_HTTPS: "false"
       SECURE_COOKIES: always
       APP_VERSION: ${APP_VERSION:-1.0.0}
       TURN_SECRET: ${APP_NIMBUS_APP_TURN_SECRET}
