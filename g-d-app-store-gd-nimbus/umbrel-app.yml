@@ -2,19 +2,40 @@ manifestVersion: 2.0
 id: g-d-app-store-gd-nimbus
 storage:
   dataRoot: data
+environment:
+  - name: TURN_HOST
+    services:
+      - app
+    note: >-
+      Nome host o IP che i browser usano per raggiungere coturn. Fuori dalla
+      LAN con Tailscale usa il nome MagicDNS (<dispositivo>.<tailnet>.ts.net)
+      o l'IP Tailscale (tailscale ip -4), non umbrel.local. Se lo lasci vuoto,
+      Nimbus usa umbrel.local. Applica e riavvia l'app dopo la modifica.
+  - name: TURN_EXTERNAL_IP
+    services:
+      - coturn
+    note: >-
+      IP che coturn annuncia come indirizzo relay. Con Tailscale è l'IP della
+      tailnet del dispositivo (tailscale ip -4, di solito 100.x.y.z). Lascia
+      vuoto solo se non usi il relay (chiamate dirette in LAN); in Docker
+      serve anche in LAN, con l'IP LAN del dispositivo. Per l'accesso da
+      Internet usa l'IP pubblico e inoltra 3478/tcp, 3478/udp e
+      49160-49200/udp.
 category: files
 name: Nimbus
-version: "1.0.2"
+version: "1.1.0"
 tagline: File, chat, chiamate e condivisione rapida sul tuo server
 description: >-
   Nimbus è uno spazio personale self-hosted: file cifrati a riposo, chat con
   cronologia, chiamate audio/video WebRTC e condivisione rapida in stile
   AirDrop. Nessun servizio cloud, nessuna telemetria, nessuna CDN.
 releaseNotes: |-
-  Corregge il service worker che poteva interrompere richieste offline con un
-  TypeError e aggiunge un timeout alle chiamate bloccate in connessione, con
-  un messaggio che invita a verificare TURN. Restano disponibili file cifrati,
-  chat, chiamate WebRTC fino a 4 partecipanti e condivisione rapida P2P.
+  Nuovo design Bloom con tema scuro predefinito, home ridisegnata, sezioni
+  Chiamate e Impostazioni più chiare e rimozione dell'indicatore online.
+  Corregge le passkey quando RP_ID non corrisponde all'host, rende
+  configurabili da umbrelOS i parametri TURN per le chiamate fuori dalla LAN
+  e aggiorna la guida HTTPS. Restano disponibili file cifrati, chat, chiamate
+  WebRTC fino a 4 partecipanti e condivisione rapida P2P.
 developer: danyx67800
 website: https://github.com/danyx67800/nimbus
 dependencies: []

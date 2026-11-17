@@ -24,7 +24,7 @@ disinstallano come tutte le altre.
 | App | Cosa fa | Porta | Versione |
 |---|---|---|---|
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
-| **[Nimbus](g-d-app-store-gd-nimbus/)** | File cifrati, chat, chiamate WebRTC e condivisione rapida stile AirDrop | 3789 | `1.0.2` |
+| **[Nimbus](g-d-app-store-gd-nimbus/)** | File cifrati, chat, chiamate WebRTC e condivisione rapida stile AirDrop | 3789 | `1.1.0` |
 | **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop, crea canali all'infinito e ripete messaggi, con dashboard guidata | 4321 | `1.1.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
@@ -92,7 +92,7 @@ Nimbus è uno spazio personale self-hosted con file cifrati a riposo, chat, chia
 
 Al primo avvio crea l'amministratore dal browser. Nimbus ha un'autenticazione multi-utente propria, quindi `app_proxy` non aggiunge il login di Umbrel: puoi creare utenti e inviti separati. Tieni comunque l'app raggiungibile solo tramite Umbrel o una rete fidata.
 
-Camera, microfono e PWA richiedono HTTPS: apri l'app dall'icona Umbrel in HTTPS. Se il certificato non è attendibile, usa Tailscale o un reverse proxy con certificato. Per le chiamate fuori dalla LAN, coturn usa `3478/tcp-udp` e `49160-49200/udp`; senza un TURN raggiungibile le chiamate funzionano solo sulla LAN.
+Camera, microfono e PWA richiedono HTTPS: apri l'app dall'icona Umbrel in HTTPS. Se il certificato non è attendibile, usa Tailscale o un reverse proxy con certificato. Per le chiamate fuori dalla LAN, coturn usa `3478/tcp-udp` e `49160-49200/udp`; senza un TURN raggiungibile le chiamate funzionano solo sulla LAN. `TURN_HOST` e `TURN_EXTERNAL_IP` si impostano da **Impostazioni → App settings → Nimbus → Advanced → Environment variables**, poi applica e riavvia l'app: usa il nome MagicDNS o l'IP Tailscale, non `umbrel.local`, per l'accesso da remoto.
 
 Dati e chiavi stanno in `${APP_DATA_DIR}/data`: un backup senza `secrets/` non è ripristinabile, un backup con `secrets/` va cifrato. I dettagli sono nel README del repository sorgente.
 
