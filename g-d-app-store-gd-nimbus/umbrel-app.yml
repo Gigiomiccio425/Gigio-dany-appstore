@@ -23,19 +23,19 @@ environment:
       49160-49200/udp.
 category: files
 name: Nimbus
-version: "1.1.0"
+version: "1.1.1"
 tagline: File, chat, chiamate e condivisione rapida sul tuo server
 description: >-
   Nimbus è uno spazio personale self-hosted: file cifrati a riposo, chat con
   cronologia, chiamate audio/video WebRTC e condivisione rapida in stile
   AirDrop. Nessun servizio cloud, nessuna telemetria, nessuna CDN.
 releaseNotes: |-
-  Nuovo design Bloom con tema scuro predefinito, home ridisegnata, sezioni
-  Chiamate e Impostazioni più chiare e rimozione dell'indicatore online.
-  Corregge le passkey quando RP_ID non corrisponde all'host, rende
-  configurabili da umbrelOS i parametri TURN per le chiamate fuori dalla LAN
-  e aggiorna la guida HTTPS. Restano disponibili file cifrati, chat, chiamate
-  WebRTC fino a 4 partecipanti e condivisione rapida P2P.
+  Nuova ricerca globale in stile Bloom: la barra in alto apre con Cmd+K
+  (Ctrl+K su Windows/Linux) uno spotlight per cercare file e raggiungere al
+  volo le sezioni. Aggiunge il tema Nero (OLED) e riserva il pulsante menu
+  alla navigazione mobile, rimuovendolo da accanto alla ricerca su desktop.
+  Restano disponibili file cifrati, chat, chiamate WebRTC fino a 4
+  partecipanti e condivisione rapida P2P.
 developer: danyx67800
 website: https://github.com/danyx67800/nimbus
 dependencies: []
