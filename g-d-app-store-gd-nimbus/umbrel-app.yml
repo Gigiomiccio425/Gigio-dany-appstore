@@ -4,17 +4,17 @@ storage:
   dataRoot: data
 category: files
 name: Nimbus
-version: "1.0.1"
+version: "1.0.2"
 tagline: File, chat, chiamate e condivisione rapida sul tuo server
 description: >-
   Nimbus è uno spazio personale self-hosted: file cifrati a riposo, chat con
   cronologia, chiamate audio/video WebRTC e condivisione rapida in stile
   AirDrop. Nessun servizio cloud, nessuna telemetria, nessuna CDN.
 releaseNotes: |-
-  Correzioni di packaging: preparazione dei permessi del volume dati, ID
-  compatibile con lo store Umbrel e salto HTTP interno compatibile con
-  app_proxy. Restano disponibili file cifrati, chat, chiamate WebRTC fino a
-  4 partecipanti e condivisione rapida P2P con verifica SHA-256.
+  Corregge il service worker che poteva interrompere richieste offline con un
+  TypeError e aggiunge un timeout alle chiamate bloccate in connessione, con
+  un messaggio che invita a verificare TURN. Restano disponibili file cifrati,
+  chat, chiamate WebRTC fino a 4 partecipanti e condivisione rapida P2P.
 developer: danyx67800
 website: https://github.com/danyx67800/nimbus
 dependencies: []
