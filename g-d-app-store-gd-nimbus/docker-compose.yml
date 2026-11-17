@@ -1,0 +1,98 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: g-d-app-store-gd-nimbus_app_1
+      APP_PORT: 3000
+      # Nimbus has its own multi-user auth. Umbrel's single-owner proxy login
+      # would prevent additional Nimbus users from signing in.
+      PROXY_AUTH_ADD: "false"
+
+  # The bind mount may be owned by root; the app runs as UID 1000 and
+  # needs to create the database and secrets on first boot.
+  prepara:
+    image: alpine:3
+    restart: "no"
+    network_mode: none
+    command:
+      - sh
+      - -c
+      - "mkdir -p /data && chown -R 1000:1000 /data"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+
+  app:
+    image: ghcr.io/danyx67800/nimbus:1.0.0
+    restart: unless-stopped
+    stop_grace_period: 1m
+    user: "1000:1000"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:size=64m
+    environment:
+      NODE_ENV: production
+      DATA_DIR: /data
+      PORT: "3000"
+      HOST: 0.0.0.0
+      TRUST_PROXY: "true"
+      REQUIRE_HTTPS: "true"
+      SECURE_COOKIES: always
+      APP_VERSION: ${APP_VERSION:-1.0.0}
+      TURN_SECRET: ${APP_NIMBUS_APP_TURN_SECRET}
+      TURN_HOST: ${DEVICE_DOMAIN_NAME}
+      TURN_PORT: "3478"
+      TURN_REALM: ${APP_NIMBUS_APP_TURN_REALM:-nimbus}
+      RP_ID: ${DEVICE_DOMAIN_NAME}
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    depends_on:
+      prepara:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/healthz').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    mem_limit: 1g
+    cpus: "2.0"
+
+  coturn:
+    image: coturn/coturn:4.6.3
+    restart: unless-stopped
+    user: "1000:1000"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:size=16m
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "49160-49200:49160-49200/udp"
+    command:
+      - -n
+      - --log-file=stdout
+      - --pidfile=/tmp/turnserver.pid
+      - --lt-cred-mech
+      - --use-auth-secret
+      - --static-auth-secret=${APP_NIMBUS_APP_TURN_SECRET}
+      - --realm=${APP_NIMBUS_APP_TURN_REALM:-nimbus}
+      - --fingerprint
+      - --no-cli
+      - --no-tls
+      - --no-dtls
+      - --min-port=49160
+      - --max-port=49200
+    mem_limit: 256m

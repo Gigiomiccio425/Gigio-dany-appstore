@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-label="Nimbus file manager">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b18"/>
+      <stop offset="0.55" stop-color="#0d1430"/>
+      <stop offset="1" stop-color="#171038"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="blur1"><feGaussianBlur stdDeviation="46"/></filter>
+    <filter id="shadow1"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#020412" flood-opacity="0.55"/></filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg1)"/>
+  <circle cx="1150" cy="120" r="240" fill="#6d4dff" opacity="0.22" filter="url(#blur1)"/>
+  <circle cx="220" cy="790" r="260" fill="#2d7dff" opacity="0.16" filter="url(#blur1)"/>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <g filter="url(#shadow1)">
+      <rect x="70" y="82" width="1300" height="736" rx="28" fill="#0b1224" stroke="#273155" stroke-width="1.5"/>
+      <rect x="70" y="82" width="268" height="736" rx="28" fill="#080e1d"/>
+      <rect x="310" y="82" width="1" height="736" fill="#222b49"/>
+      <g>
+        <rect x="104" y="116" width="42" height="42" rx="12" fill="url(#accent1)"/>
+        <text x="125" y="146" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">N</text>
+        <text x="162" y="136" font-size="20" font-weight="700" fill="#f2f5ff">Nimbus</text>
+        <text x="162" y="154" font-size="10" font-weight="600" letter-spacing="2.4" fill="#7e8bb4">SELF-HOSTED</text>
+      </g>
+      <text x="104" y="210" font-size="10" font-weight="700" letter-spacing="2" fill="#66739a">SPAZIO PERSONALE</text>
+      <g font-size="16" fill="#aeb8d8">
+        <rect x="90" y="226" width="226" height="42" rx="10" fill="#182243"/>
+        <text x="124" y="253" fill="#ffffff" font-weight="600">File</text>
+        <text x="124" y="306">Chat</text>
+        <text x="124" y="354">Chiamate</text>
+      </g>
+      <text x="104" y="410" font-size="10" font-weight="700" letter-spacing="2" fill="#66739a">ORGANIZZA</text>
+      <text x="124" y="452" font-size="16" fill="#aeb8d8">Condivisi</text>
+      <text x="124" y="500" font-size="16" fill="#aeb8d8">Cestino</text>
+      <rect x="90" y="742" width="226" height="50" rx="12" fill="#101a35"/>
+      <text x="110" y="764" font-size="12" fill="#d8e0f8" font-weight="600">Amministratore</text>
+      <text x="110" y="780" font-size="10" fill="#7f8cb2">0 B / 20 GB</text>
+      <rect x="110" y="790" width="180" height="4" rx="2" fill="#263359"/>
+      <rect x="110" y="790" width="26" height="4" rx="2" fill="#6d8dff"/>
+    </g>
+    <text x="338" y="146" font-size="30" font-weight="750" fill="#f6f8ff">File</text>
+    <text x="338" y="176" font-size="13" fill="#8c99bd">Tutto cifrato a riposo con AES-256-GCM.</text>
+    <rect x="1192" y="112" width="142" height="44" rx="12" fill="url(#accent1)"/>
+    <text x="1263" y="139" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">Carica</text>
+    <rect x="338" y="204" width="612" height="44" rx="12" fill="#0e1730" stroke="#243052"/>
+    <text x="360" y="232" font-size="13" fill="#68769e">Cerca per nome…</text>
+    <rect x="338" y="274" width="144" height="44" rx="12" fill="#101a35" stroke="#243052"/>
+    <text x="410" y="301" text-anchor="middle" font-size="13" fill="#d9e2fb">Cartelle</text>
+    <rect x="496" y="274" width="144" height="44" rx="12" fill="#18244a"/>
+    <text x="568" y="301" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="600">File</text>
+    <g>
+      <rect x="338" y="352" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="630" y="352" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="922" y="352" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="338" y="544" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="630" y="544" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="922" y="544" width="270" height="168" rx="18" fill="#0f1830" stroke="#253256"/>
+      <rect x="362" y="378" width="56" height="56" rx="14" fill="#1b2b55"/>
+      <rect x="654" y="378" width="56" height="56" rx="14" fill="#3a2350"/>
+      <rect x="946" y="378" width="56" height="56" rx="14" fill="#173f4a"/>
+      <rect x="362" y="570" width="56" height="56" rx="14" fill="#25304f"/>
+      <rect x="654" y="570" width="56" height="56" rx="14" fill="#2d2b55"/>
+      <rect x="946" y="570" width="56" height="56" rx="14" fill="#1f3e50"/>
+      <text x="362" y="470" font-size="15" font-weight="600" fill="#edf1ff">Foto vacanze</text>
+      <text x="654" y="470" font-size="15" font-weight="600" fill="#edf1ff">Progetto.pdf</text>
+      <text x="946" y="470" font-size="15" font-weight="600" fill="#edf1ff">Note riunione</text>
+      <text x="362" y="662" font-size="15" font-weight="600" fill="#edf1ff">Backup</text>
+      <text x="654" y="662" font-size="15" font-weight="600" fill="#edf1ff">Musica</text>
+      <text x="946" y="662" font-size="15" font-weight="600" fill="#edf1ff">Video</text>
+      <text x="362" y="492" font-size="11" fill="#7b89ad">12 elementi · 2,4 GB</text>
+      <text x="654" y="492" font-size="11" fill="#7b89ad">PDF · 1,8 MB</text>
+      <text x="946" y="492" font-size="11" fill="#7b89ad">Documento · 24 KB</text>
+      <text x="362" y="684" font-size="11" fill="#7b89ad">Cartella</text>
+      <text x="654" y="684" font-size="11" fill="#7b89ad">Cartella</text>
+      <text x="946" y="684" font-size="11" fill="#7b89ad">Cartella</text>
+    </g>
+    <g transform="translate(1080, 700)">
+      <rect x="0" y="0" width="212" height="64" rx="18" fill="#101a35" stroke="#2b3a63"/>
+      <circle cx="34" cy="32" r="18" fill="url(#accent1)"/>
+      <text x="34" y="38" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">↗</text>
+      <text x="64" y="28" font-size="12" font-weight="600" fill="#eef2ff">Condivisione rapida</text>
+      <text x="64" y="46" font-size="10" fill="#8a97bb">Trascina un file ovunque</text>
+    </g>
+  </g>
+</svg>

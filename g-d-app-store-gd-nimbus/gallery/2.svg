@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-label="Nimbus quick share">
+  <defs>
+    <radialGradient id="bg2" cx="0.5" cy="0.48" r="0.75">
+      <stop offset="0" stop-color="#172052"/>
+      <stop offset="0.55" stop-color="#0b1128"/>
+      <stop offset="1" stop-color="#060913"/>
+    </radialGradient>
+    <linearGradient id="accent2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#b04dff"/>
+    </linearGradient>
+    <filter id="glow2"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="shadow2"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/></filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg2)"/>
+  <circle cx="720" cy="430" r="300" fill="none" stroke="#4966b8" stroke-opacity="0.18" stroke-width="1.5"/>
+  <circle cx="720" cy="430" r="212" fill="none" stroke="#4966b8" stroke-opacity="0.22" stroke-width="1.5"/>
+  <circle cx="720" cy="430" r="124" fill="none" stroke="#4966b8" stroke-opacity="0.26" stroke-width="1.5"/>
+  <circle cx="720" cy="430" r="310" fill="#4f7cff" opacity="0.10" filter="url(#glow2)"/>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" filter="url(#shadow2)">
+    <rect x="250" y="80" width="940" height="740" rx="30" fill="#080d1c" fill-opacity="0.94" stroke="#2a3760" stroke-width="1.5"/>
+    <text x="720" y="146" text-anchor="middle" font-size="30" font-weight="750" fill="#f7f9ff">Condivisione rapida</text>
+    <text x="720" y="178" text-anchor="middle" font-size="14" fill="#8e9cc2">Rilascia il file sull’avatar di chi è online. Il file viaggia diretto, cifrato con DTLS.</text>
+    <g transform="translate(720, 430)">
+      <circle r="36" fill="url(#accent2)"/>
+      <text x="0" y="12" text-anchor="middle" font-size="28" font-weight="800" fill="#fff">N</text>
+      <text x="0" y="66" text-anchor="middle" font-size="12" fill="#9aa8ce">Il tuo dispositivo</text>
+    </g>
+    <g>
+      <g transform="translate(520, 268)">
+        <circle r="46" fill="#2c3c6e" stroke="#7b9aff" stroke-width="3"/>
+        <text x="0" y="9" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">MR</text>
+        <text x="0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#f1f4ff">Marta</text>
+        <circle cx="36" cy="-34" r="8" fill="#34d399" stroke="#080d1c" stroke-width="3"/>
+      </g>
+      <g transform="translate(930, 286)">
+        <circle r="46" fill="#3b2a5e" stroke="#b88cff" stroke-width="3"/>
+        <text x="0" y="9" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">LG</text>
+        <text x="0" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#f1f4ff">Luca</text>
+        <circle cx="36" cy="-34" r="8" fill="#fbbf24" stroke="#080d1c" stroke-width="3"/>
+      </g>
+      <g transform="translate(470, 548)">
+        <circle r="40" fill="#24365c" stroke="#5e8cff" stroke-width="2"/>
+        <text x="0" y="8" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">SF</text>
+        <text x="0" y="68" text-anchor="middle" font-size="12" fill="#aab6d6">Sofia</text>
+        <circle cx="30" cy="-30" r="7" fill="#34d399" stroke="#080d1c" stroke-width="3"/>
+      </g>
+      <g transform="translate(972, 552)">
+        <circle r="40" fill="#2a2b4a" stroke="#6c78a0" stroke-width="2"/>
+        <text x="0" y="8" text-anchor="middle" font-size="17" font-weight="700" fill="#cbd4ee">AP</text>
+        <text x="0" y="68" text-anchor="middle" font-size="12" fill="#8e9abb">Andrea</text>
+      </g>
+    </g>
+    <g transform="translate(380, 636)">
+      <rect x="0" y="0" width="680" height="76" rx="16" fill="#0f1830" stroke="#2a3a66"/>
+      <rect x="18" y="18" width="40" height="40" rx="10" fill="#20325f"/>
+      <path d="M32 44h12l6-8h14" stroke="#9ab4ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="76" y="32" font-size="14" font-weight="600" fill="#f0f3ff">presentazione-finale.pdf</text>
+      <text x="76" y="52" font-size="11" fill="#8794ba">14,2 MB · SHA-256 verificato · in attesa</text>
+      <rect x="570" y="20" width="88" height="36" rx="10" fill="#24345c"/>
+      <text x="614" y="43" text-anchor="middle" font-size="12" fill="#b9c6e8">60 s</text>
+    </g>
+    <rect x="300" y="752" width="840" height="1" fill="#253155"/>
+    <text x="720" y="786" text-anchor="middle" font-size="12" fill="#7683a7">P2P via WebRTC DataChannel · fallback cifrato in chat se il destinatario è offline</text>
+  </g>
+</svg>

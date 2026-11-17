@@ -1,0 +1,32 @@
+manifestVersion: 2.0
+id: g-d-app-store-gd-nimbus
+storage:
+  dataRoot: data
+category: files
+name: Nimbus
+version: "1.0.0"
+tagline: File, chat, chiamate e condivisione rapida sul tuo server
+description: >-
+  Nimbus è uno spazio personale self-hosted: file cifrati a riposo, chat con
+  cronologia, chiamate audio/video WebRTC e condivisione rapida in stile
+  AirDrop. Nessun servizio cloud, nessuna telemetria, nessuna CDN.
+releaseNotes: |-
+  Prima release pubblica. File cifrati a riposo, chat, chiamate WebRTC fino a
+  4 partecipanti e condivisione rapida P2P con verifica SHA-256.
+  Richiede HTTPS per fotocamera, microfono e PWA.
+developer: danyx67800
+website: https://github.com/danyx67800/nimbus
+dependencies: []
+repo: https://github.com/danyx67800/nimbus
+support: https://github.com/danyx67800/nimbus/issues
+port: 3789
+icon: https://raw.githubusercontent.com/danyx67800/nimbus/main/umbrel/nimbus-app/icon.png
+gallery:
+  - https://raw.githubusercontent.com/danyx67800/nimbus/main/umbrel/nimbus-app/gallery/1.png
+  - https://raw.githubusercontent.com/danyx67800/nimbus/main/umbrel/nimbus-app/gallery/2.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+requiresHttps: true
+submitter: Gigiomiccio425
+submission: https://github.com/Gigiomiccio425/Gigio-dany-appstore
