@@ -23,20 +23,19 @@ environment:
       49160-49200/udp.
 category: files
 name: Nimbus
-version: "1.3.0"
+version: "1.3.1"
 tagline: File, chat, chiamate e condivisione rapida sul tuo server
 description: >-
   Nimbus è uno spazio personale self-hosted: file cifrati a riposo, chat con
   cronologia, chiamate audio/video WebRTC e condivisione rapida in stile
   AirDrop. Nessun servizio cloud, nessuna telemetria, nessuna CDN.
 releaseNotes: |-
-  Progetti condivisi in stile Trello: membri con ruoli, etichette, scadenze,
-  assegnatari, foto di copertina, allegati e commenti sulle schede. Ogni
-  progetto ha una chat di gruppo automatica. Checklist con note per attività
-  e presenza online aggiornata in tempo reale, senza ricaricare la pagina.
-  Ricerca globale su file, conversazioni, messaggi, schede e persone.
-  Migrazione automatica del database alla versione 6; i dati esistenti
-  vengono conservati.
+  Notifiche per i nuovi messaggi: campanella con badge e cronologia nel sito,
+  avviso del browser quando la pagina è in background e richiesta del permesso
+  al primo accesso. La sezione file ha nuovi criteri di ordinamento (nome,
+  creazione, ultima modifica, dimensione) e un tasto di aggiornamento. Le chat
+  si riordinano in base all'ultimo messaggio e i pulsanti di chiamata restano
+  dentro le card anche su schermi stretti.
 developer: danyx67800
 website: https://github.com/danyx67800/nimbus
 dependencies: []
