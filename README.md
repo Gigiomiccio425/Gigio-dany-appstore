@@ -24,7 +24,7 @@ disinstallano come tutte le altre.
 | App | Cosa fa | Porta | Versione |
 |---|---|---|---|
 | **[FraBot](g-d-app-store-gd-frabot/)** | Bot Discord con ticket, mini giochi e annunci Twitch, configurato da un pannello web | 8417 | `1.0.2` |
-| **[Nimbus](g-d-app-store-gd-nimbus/)** | File cifrati, chat, chiamate WebRTC e condivisione rapida stile AirDrop | 3789 | `1.3.2` |
+| **[Nimbus](g-d-app-store-gd-nimbus/)** | File cifrati, chat, chiamate WebRTC e condivisione rapida stile AirDrop | 3789 | `1.3.3` |
 | **[Bot Nuke](g-d-app-store-gd-bot-nuke/)** | Bot Discord per eventi: rinomina e riordina i canali in loop, crea canali all'infinito e ripete messaggi, con dashboard guidata | 4321 | `1.1.0` |
 | **[Beszel](g-d-app-store-gd-beszel/)** | Monitoraggio leggero dei tuoi server: carico, memoria, dischi, container | 8090 | `0.19.0` |
 | **[Beszel Agent](g-d-app-store-gd-beszel-agent/)** | Fa misurare *questo* Umbrel da un Beszel che gira altrove | 8091 | `0.19.0` |
