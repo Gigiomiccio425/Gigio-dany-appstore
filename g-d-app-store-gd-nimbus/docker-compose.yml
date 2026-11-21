@@ -21,7 +21,7 @@ services:
       - ${APP_DATA_DIR}/data:/data
 
   app:
-    image: ghcr.io/danyx67800/nimbus:1.3.2
+    image: ghcr.io/danyx67800/nimbus:1.3.3
     restart: unless-stopped
     stop_grace_period: 1m
     user: "1000:1000"
@@ -43,7 +43,7 @@ services:
       # a plain-HTTP session unusable, so this internal hop stays HTTP-safe.
       REQUIRE_HTTPS: "false"
       SECURE_COOKIES: always
-      APP_VERSION: ${APP_VERSION:-1.3.2}
+      APP_VERSION: ${APP_VERSION:-1.3.3}
       TURN_SECRET: ${APP_NIMBUS_APP_TURN_SECRET}
       # Overridable from umbrelOS: Settings > App settings > Nimbus >
       # Advanced > Environment variables. Empty falls back to the .local name.
