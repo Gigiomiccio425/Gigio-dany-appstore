@@ -10,7 +10,7 @@ services:
       PROXY_AUTH_ADD: "true"
 
   magazzino:
-    image: ghcr.io/gigiomiccio425/magazzino-zimaos:2.0.2
+    image: ghcr.io/gigiomiccio425/magazzino-zimaos:2.0.3
 
     restart: on-failure
 

@@ -4,7 +4,7 @@ name: GD Magazzino
 tagline: Magazzino hardware e centro di comando del server
 icon: https://gigiomiccio.it/magazzino/icon.png
 category: Utilities
-version: "2.0.2"
+version: "2.0.3"
 port: 8000
 
 description: >-
@@ -25,10 +25,9 @@ gallery:
   - https://i.imgur.com/yyVG0Jb.jpeg
 
 releaseNotes: >-
-  Versione 2.0.2: nella sezione Servizi arriva "Importa", per creare in un
-  colpo solo i servizi del server (per esempio tutte le app di Umbrel) da un
-  file JSON, con moduli e macchina collegata. I servizi già presenti non
-  vengono modificati e non viene cancellato niente.
+  Versione 2.0.3: dopo un salvataggio la pagina resta dove eri invece di
+  tornare in cima; su PC la barra laterale resta ferma; filtri su una riga;
+  dopo ogni aggiornamento il browser usa subito la grafica nuova.
 
 dependencies: []
 
