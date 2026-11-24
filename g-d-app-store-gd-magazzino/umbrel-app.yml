@@ -4,7 +4,7 @@ name: GD Magazzino
 tagline: Magazzino hardware e centro di comando del server
 icon: https://gigiomiccio.it/magazzino/icon.png
 category: Utilities
-version: "2.0.3"
+version: "2.2.0"
 port: 8000
 
 description: >-
@@ -25,9 +25,11 @@ gallery:
   - https://i.imgur.com/yyVG0Jb.jpeg
 
 releaseNotes: >-
-  Versione 2.0.3: dopo un salvataggio la pagina resta dove eri invece di
-  tornare in cima; su PC la barra laterale resta ferma; filtri su una riga;
-  dopo ogni aggiornamento il browser usa subito la grafica nuova.
+  Versione 2.2.0: nuovo design chiaro con giallo sicurezza e nuova zona
+  "Stampa etichette": coda con più pezzi insieme, etichette 70 x 37 mm, solo
+  QR o bandiere per cavi da avvolgere e chiudere, anteprima del foglio A4.
+  "Aggiungi alla stampa" dalla selezione multipla e dalle schede. I dati
+  esistenti non vengono toccati (si aggiunge solo la tabella della coda).
 
 dependencies: []
 
