@@ -6,18 +6,17 @@ services:
     environment:
       APP_HOST: g-d-app-store-gd-magazzino_magazzino_1
       APP_PORT: 8000
-      PROXY_AUTH_ADD: "false"
+      # Login Umbrel obbligatorio: dalla v2 l'app non ha una password propria.
+      PROXY_AUTH_ADD: "true"
 
   magazzino:
-    image: ghcr.io/gigiomiccio425/magazzino-zimaos:1.1.1
+    image: ghcr.io/gigiomiccio425/magazzino-zimaos:2.0.0
 
     restart: on-failure
 
     environment:
-      APP_PASSWORD: ${APP_PASSWORD:-cambiami}
-      APP_NAME: ${APP_NAME:-MAGAZZINO}
-      SECRET_KEY: ${SECRET_KEY:-}
-      TZ: ${TZ:-Europe/Rome}
+      APP_NAME: MAGAZZINO
+      TZ: Europe/Rome
       DATA_DIR: /data
 
     volumes:
