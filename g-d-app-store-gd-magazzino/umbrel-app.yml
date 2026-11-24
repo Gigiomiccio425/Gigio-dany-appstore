@@ -4,7 +4,7 @@ name: GD Magazzino
 tagline: Magazzino hardware e centro di comando del server
 icon: https://gigiomiccio.it/magazzino/icon.png
 category: Utilities
-version: "2.0.0"
+version: "2.0.1"
 port: 8000
 
 description: >-
@@ -25,13 +25,10 @@ gallery:
   - https://i.imgur.com/yyVG0Jb.jpeg
 
 releaseNotes: >-
-  Versione 2.0: gestionale completo. Il database della 1.1 viene migrato in
-  automatico, con un backup salvato prima. La password dell'app è stata tolta:
-  l'accesso è protetto dal login Umbrel. Alla prima modifica ogni operatore
-  registra il proprio nome e la propria impronta o password. Novità: QR ed
-  etichette, campi per categoria, foto, registro test, inventari, progetti,
-  servizi, changelog, incidenti, manutenzioni, avvisi Discord, tema scuro,
-  app installabile su telefono.
+  Versione 2.0.1: correzioni. Import CSV più sicuro (macchine sconosciute
+  segnalate, valori lasciati come testo), export protetto dalle formule di
+  Excel, webhook gestibili solo dagli amministratori, firma più robusta,
+  messaggi chiari al posto di errori su date o immagini non valide.
 
 dependencies: []
 
